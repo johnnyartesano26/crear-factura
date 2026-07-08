@@ -48,9 +48,30 @@ td{padding:9px 14px;border-bottom:1px solid #f0f0f0}
 .badge-ok{background:#c6f6d5;color:#22543d}
 .badge-pending{background:#fefcbf;color:#744210}
 .empty{text-align:center;padding:30px;color:#999}
+.login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#1a1a2e;display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-box{background:#fff;padding:40px;border-radius:14px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);max-width:380px;width:90%}
+.login-box img{height:60px;margin-bottom:20px}
+.login-box h2{color:#1a1a2e;margin-bottom:6px}
+.login-box p{color:#999;font-size:.85em;margin-bottom:20px}
+.login-box input{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1em;text-align:center;font-family:inherit;margin-bottom:12px}
+.login-box input:focus{outline:none;border-color:#f0c040}
+.login-box .login-btn{width:100%;padding:12px;background:#f0c040;color:#1a1a2e;border:none;border-radius:8px;font-size:1em;font-weight:700;cursor:pointer}
+.login-box .login-btn:hover{background:#ffd866}
+.login-error{color:#e57373;font-size:.8em;margin-top:8px;display:none}
 </style>
 </head>
 <body>
+
+<div class="login-overlay" id="loginOverlay">
+<div class="login-box">
+<img src="https://www.cervezamadremonte.com/assets/images/main-logo.png" alt="Madre Monte">
+<h2>Crear Factura</h2>
+<p>Programa Automático de Facturación</p>
+<input type="password" id="claveInput" placeholder="Ingresa la clave" onkeydown="if(event.key==='Enter')validarClave()">
+<button class="login-btn" onclick="validarClave()">Ingresar</button>
+<div class="login-error" id="loginError">Clave incorrecta</div>
+</div>
+</div>
 
 <div class="header">
 <img src="https://www.cervezamadremonte.com/assets/images/main-logo.png" alt="Madre Monte">
@@ -113,6 +134,19 @@ td{padding:9px 14px;border-bottom:1px solid #f0f0f0}
 </div>
 
 <script>
+const CLAVE = 'MadreMonte2026';
+
+function validarClave() {
+  const input = document.getElementById('claveInput').value;
+  if (input === CLAVE) {
+    document.getElementById('loginOverlay').style.display = 'none';
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('claveInput').value = '';
+    document.getElementById('claveInput').focus();
+  }
+}
+
 let DATA = { productos: [], clientes: [], facturas: [] };
 let itemsActuales = [];
 
