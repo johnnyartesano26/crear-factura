@@ -1,0 +1,27 @@
+name: Emitir Facturas
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  emitir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Ejecutar emisión
+        env:
+          ALEGRA_EMAIL: ${{ secrets.ALEGRA_EMAIL }}
+          ALEGRA_TOKEN: ${{ secrets.ALEGRA_TOKEN }}
+        run: python emitir.py
+
+      - name: Reporte
+        if: always()
+        run: echo "Proceso completado. Revisa los logs para ver el resultado."
