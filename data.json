@@ -1,0 +1,17 @@
+{
+  "productos": [
+    {"codigo": "PTB01", "nombre": "Golden Ale 330ml", "precio": 8500, "id_alegra": 64},
+    {"codigo": "PTB02", "nombre": "Irish Red Ale 330ml", "precio": 8500, "id_alegra": 65},
+    {"codigo": "PTB03", "nombre": "APA 330ml", "precio": 8500, "id_alegra": 66},
+    {"codigo": "PTB04", "nombre": "IPA 330ml", "precio": 9500, "id_alegra": 67},
+    {"codigo": "PTB05", "nombre": "Stout 330ml", "precio": 8500, "id_alegra": 68},
+    {"codigo": "PTL01", "nombre": "Golden Ale (litro)", "precio": 18000, "id_alegra": 69},
+    {"codigo": "PTL02", "nombre": "Irish Red (litro)", "precio": 18000, "id_alegra": 70},
+    {"codigo": "PTL03", "nombre": "APA (litro)", "precio": 18000, "id_alegra": 71},
+    {"codigo": "PTL04", "nombre": "IPA (litro)", "precio": 19000, "id_alegra": 72},
+    {"codigo": "PTL05", "nombre": "Stout (litro)", "precio": 18000, "id_alegra": 73},
+    {"codigo": "DOM01", "nombre": "Domicilio", "precio": 12000, "id_alegra": 58}
+  ],
+  "clientes": [],
+  "facturas": []
+}

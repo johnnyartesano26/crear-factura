@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear Factura — Madre Monte</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f0e8;min-height:100vh}
+.header{background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;padding:18px 24px;display:flex;align-items:center;gap:14px}
+.header img{height:40px}
+.header h1{font-size:1.2em;color:#f0c040}
+.header .sub{font-size:.75em;opacity:.6}
+.content{max-width:1100px;margin:0 auto;padding:20px}
+.tabs{display:flex;gap:2px;margin-bottom:20px;background:#fff;border-radius:10px;padding:4px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.tab{padding:10px 20px;border:none;background:none;cursor:pointer;border-radius:8px;font-size:.85em;font-weight:500;color:#666;transition:all .2s}
+.tab:hover{background:#f0ece4;color:#1a1a2e}
+.tab.active{background:#1a1a2e;color:#f0c040}
+.catalogo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.prod-card{background:#fff;border-radius:10px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-left:4px solid #f0c040}
+.prod-card .codigo{font-size:.7em;color:#999;font-family:monospace}
+.prod-card .nombre{font-weight:600;margin:4px 0;color:#1a1a2e}
+.prod-card .precio{font-size:1.2em;font-weight:700;color:#3fb950}
+.form-card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.05);margin-bottom:16px}
+.form-card h2{font-size:1em;color:#1a1a2e;margin-bottom:14px}
+.form-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.form-group{display:flex;flex-direction:column;gap:4px;flex:1;min-width:150px}
+.form-group label{font-size:.75em;color:#666;font-weight:600}
+.form-group input,.form-group select{padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:.85em;font-family:inherit}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:.85em;transition:all .2s}
+.btn-primary{background:#f0c040;color:#1a1a2e}
+.btn-primary:hover{background:#ffd866}
+.btn-secondary{background:#1a1a2e;color:#fff}
+.items-list{margin-top:14px}
+.item-row{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #eee}
+.item-row select{flex:2;padding:6px;border:1px solid #ddd;border-radius:6px}
+.item-row input{width:80px;padding:6px;border:1px solid #ddd;border-radius:6px;text-align:center}
+.item-row .item-total{font-weight:600;min-width:80px;text-align:right}
+.item-row .btn-remove{background:none;border:none;color:#e57373;cursor:pointer;font-size:1.1em}
+.total-box{text-align:right;font-size:1.3em;font-weight:700;margin-top:12px;color:#1a1a2e}
+.table-wrap{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden}
+.table-wrap h3{padding:14px 18px;font-size:.9em;border-bottom:2px solid #eee}
+.scroll{max-height:50vh;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:.82em}
+th{background:#f7fafc;padding:10px 14px;text-align:left;font-weight:600;color:#555;border-bottom:2px solid #eee;position:sticky;top:0}
+td{padding:9px 14px;border-bottom:1px solid #f0f0f0}
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75em;font-weight:700}
+.badge-ok{background:#c6f6d5;color:#22543d}
+.badge-pending{background:#fefcbf;color:#744210}
+.empty{text-align:center;padding:30px;color:#999}
+</style>
+</head>
+<body>
+
+<div class="header">
+<img src="https://www.cervezamadremonte.com/assets/images/main-logo.png" alt="Madre Monte">
+<div>
+<h1>Crear Factura</h1>
+<div class="sub">Programa Automático de Facturación · Alegra API</div>
+</div>
+</div>
+
+<div class="content">
+<div class="tabs">
+<button class="tab active" onclick="switchTab('nueva')">📝 Nueva Factura</button>
+<button class="tab" onclick="switchTab('catalogo')">📦 Catálogo</button>
+<button class="tab" onclick="switchTab('historial')">📋 Historial</button>
+</div>
+
+<!-- TAB: Nueva Factura -->
+<div class="tab-content" id="tab-nueva">
+<div class="form-card">
+<h2>👤 Cliente</h2>
+<div class="form-row">
+<div class="form-group" style="flex:3">
+<label>Buscar cliente</label>
+<input type="text" id="clienteSearch" placeholder="Nombre del cliente..." oninput="buscarCliente()">
+<div id="clienteSuggest" style="display:none;position:absolute;background:#fff;border:1px solid #ddd;border-radius:6px;max-height:150px;overflow:auto;z-index:10;margin-top:2px"></div>
+</div>
+<div class="form-group"><label>NIT/Cédula</label><input type="text" id="clienteId" placeholder="Opcional"></div>
+</div>
+</div>
+
+<div class="form-card">
+<h2>🍺 Productos</h2>
+<div id="itemsContainer">
+<div class="items-list" id="itemsList"></div>
+</div>
+<button class="btn btn-secondary" onclick="agregarItem()" style="margin-top:10px">+ Agregar producto</button>
+<div id="itemsList"></div>
+<div class="total-box">Total: $<span id="totalFactura">0</span></div>
+</div>
+
+<button class="btn btn-primary" onclick="generarFactura()" style="width:100%;justify-content:center;padding:14px;font-size:1em">📄 Crear Factura</button>
+</div>
+
+<!-- TAB: Catálogo -->
+<div class="tab-content" id="tab-catalogo" style="display:none">
+<h2 style="margin-bottom:14px;color:#1a1a2e">📦 Productos y Precios</h2>
+<div class="catalogo-grid" id="catalogoGrid"></div>
+</div>
+
+<!-- TAB: Historial -->
+<div class="tab-content" id="tab-historial" style="display:none">
+<div class="table-wrap">
+<h3>📋 Facturas Generadas</h3>
+<div class="scroll"><table>
+<thead><tr><th>Fecha</th><th>Factura</th><th>Cliente</th><th>Total</th><th>Estado</th></tr></thead>
+<tbody id="historialBody"><tr><td colspan="5" class="empty">No hay facturas registradas</td></tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+
+<script>
+let DATA = { productos: [], clientes: [], facturas: [] };
+let itemsActuales = [];
+
+async function init() {
+  try {
+    const r = await fetch('data.json');
+    DATA = await r.json();
+  } catch(e) {
+    console.warn('data.json no disponible, usando catálogo por defecto');
+    DATA.productos = [
+      {codigo:"PTB01",nombre:"Golden Ale 330ml",precio:8500},
+      {codigo:"PTB02",nombre:"Irish Red Ale 330ml",precio:8500},
+      {codigo:"PTB03",nombre:"APA 330ml",precio:8500},
+      {codigo:"PTB04",nombre:"IPA 330ml",precio:9500},
+      {codigo:"PTB05",nombre:"Stout 330ml",precio:8500},
+      {codigo:"PTL01",nombre:"Golden Ale (litro)",precio:18000},
+      {codigo:"PTL02",nombre:"Irish Red (litro)",precio:18000},
+      {codigo:"PTL03",nombre:"APA (litro)",precio:18000},
+      {codigo:"PTL04",nombre:"IPA (litro)",precio:19000},
+      {codigo:"PTL05",nombre:"Stout (litro)",precio:18000},
+      {codigo:"DOM01",nombre:"Domicilio",precio:12000}
+    ];
+  }
+  renderCatalogo();
+  agregarItem();
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).style.display = 'block';
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.textContent.toLowerCase().includes(name)) t.classList.add('active');
+  });
+  if (name === 'historial') renderHistorial();
+}
+
+function renderCatalogo() {
+  document.getElementById('catalogoGrid').innerHTML = DATA.productos.map(p =>
+    '<div class="prod-card">' +
+    '<div class="codigo">' + p.codigo + '</div>' +
+    '<div class="nombre">' + p.nombre + '</div>' +
+    '<div class="precio">$' + p.precio.toLocaleString('es-CO') + '</div>' +
+    '</div>'
+  ).join('');
+}
+
+let itemId = 0;
+function agregarItem() {
+  itemId++;
+  const div = document.createElement('div');
+  div.className = 'item-row';
+  div.id = 'item-' + itemId;
+  div.innerHTML =
+    '<select onchange="calcTotal()">' +
+    DATA.productos.map(p => '<option value="' + p.codigo + '" data-precio="' + p.precio + '">' + p.codigo + ' - ' + p.nombre + '</option>').join('') +
+    '</select>' +
+    '<span style="font-size:.8em;color:#666">Cant:</span>' +
+    '<input type="number" value="1" min="1" onchange="calcTotal()">' +
+    '<span class="item-total">$' + (DATA.productos[0] ? DATA.productos[0].precio.toLocaleString() : '0') + '</span>' +
+    '<button class="btn-remove" onclick="eliminarItem(' + itemId + ')">✕</button>';
+  document.getElementById('itemsList').appendChild(div);
+  calcTotal();
+}
+
+function eliminarItem(id) {
+  document.getElementById('item-' + id).remove();
+  calcTotal();
+}
+
+function calcTotal() {
+  let total = 0;
+  document.querySelectorAll('.item-row').forEach(row => {
+    const sel = row.querySelector('select');
+    const cant = row.querySelector('input[type=number]');
+    if (sel && cant) {
+      const precio = parseInt(sel.selectedOptions[0].dataset.precio);
+      const cantidad = parseInt(cant.value) || 1;
+      const subtotal = precio * cantidad;
+      total += subtotal;
+      row.querySelector('.item-total').textContent = '$' + subtotal.toLocaleString('es-CO');
+    }
+  });
+  document.getElementById('totalFactura').textContent = total.toLocaleString('es-CO');
+}
+
+function buscarCliente() {
+  const q = document.getElementById('clienteSearch').value.toLowerCase();
+  if (q.length < 2) return;
+  const sugerencias = DATA.clientes.filter(c => c.nombre.toLowerCase().includes(q)).slice(0, 5);
+  if (!sugerencias.length) return;
+  const div = document.getElementById('clienteSuggest');
+  div.innerHTML = sugerencias.map(c => '<div style="padding:8px 12px;cursor:pointer;border-bottom:1px solid #eee" onclick="seleccionarCliente(\'' + c.nombre + '\',\'' + (c.id || '') + '\')">' + c.nombre + '</div>').join('');
+  div.style.display = 'block';
+}
+
+function seleccionarCliente(nombre, id) {
+  document.getElementById('clienteSearch').value = nombre;
+  document.getElementById('clienteId').value = id;
+  document.getElementById('clienteSuggest').style.display = 'none';
+}
+
+function generarFactura() {
+  const cliente = document.getElementById('clienteSearch').value.trim();
+  if (!cliente) { alert('Selecciona un cliente'); return; }
+
+  const items = [];
+  document.querySelectorAll('.item-row').forEach(row => {
+    const sel = row.querySelector('select');
+    const cant = row.querySelector('input[type=number]');
+    if (sel && cant) {
+      const opt = sel.selectedOptions[0];
+      items.push({
+        codigo: sel.value,
+        nombre: opt.text.split(' - ')[1] || opt.text,
+        precio: parseInt(opt.dataset.precio),
+        cantidad: parseInt(cant.value) || 1
+      });
+    }
+  });
+
+  const total = items.reduce((s, i) => s + i.precio * i.cantidad, 0);
+  const factura = {
+    fecha: new Date().toISOString().split('T')[0],
+    numero: 'FE-' + (DATA.facturas.length + 1).toString().padStart(3, '0'),
+    cliente: cliente,
+    items: items,
+    total: total,
+    estado: 'draft'
+  };
+
+  DATA.facturas.push(factura);
+  alert('✅ Factura ' + factura.numero + ' creada para ' + cliente + '\nTotal: $' + total.toLocaleString('es-CO'));
+
+  // Limpiar formulario
+  document.getElementById('clienteSearch').value = '';
+  document.getElementById('clienteId').value = '';
+  document.getElementById('itemsList').innerHTML = '';
+  agregarItem();
+  calcTotal();
+}
+
+function renderHistorial() {
+  const tbody = document.getElementById('historialBody');
+  if (!DATA.facturas.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">No hay facturas registradas</td></tr>';
+    return;
+  }
+  tbody.innerHTML = DATA.facturas.map(f =>
+    '<tr>' +
+    '<td>' + f.fecha + '</td>' +
+    '<td><strong>' + f.numero + '</strong></td>' +
+    '<td>' + f.cliente + '</td>' +
+    '<td>$' + f.total.toLocaleString('es-CO') + '</td>' +
+    '<td><span class="badge badge-pending">' + f.estado + '</span></td>' +
+    '</tr>'
+  ).join('');
+}
+
+init();
+</script>
+</body>
+</html>
