@@ -1,225 +1,294 @@
+#!/usr/bin/env python3
 """
-EMITIR FACTURAS — Madre Monte
-Lee el consolidado de ventas desde Google Sheets y genera facturas en Alegra.
+EMITIR FACTURAS — Madre Monte (versión nube, corregida)
+Replica la lógica del pipeline local facturar_google_sheets_v2.py:
+  - Lee el Sheet de REMISIONES (productos + cantidades reales, NO adivina)
+  - Lee el Sheet de INVENTARIO y verifica stock por estilo
+  - Busca el cliente en Alegra y crea la factura BORRADOR
+  - Evita duplicados con emitidas.json (idempotente)
 
 Uso:
-  python emitir.py              # Procesa las filas pendientes
-  python emitir.py --dry-run    # Solo muestra lo que se emitiría
+  python emitir.py            # emite las remisiones pendientes
+  python emitir.py --dry-run  # muestra qué se emitiría, sin crear nada
 """
-
-import csv
-import io
-import os
-import sys
-import json
-import logging
-import re
+import csv, io, os, sys, json, base64, time, hashlib, urllib.request, urllib.parse, urllib.error
 from datetime import datetime, timedelta
-from pathlib import Path
 
-import urllib.request
-import urllib.error
+DRY = "--dry-run" in sys.argv
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger("emitir")
-
-# ── Configuración ──
-SHEET_ID = "1WFq09-LDg4le6FqC9BnBZfKZXSmb8Kn195wnFZaEMys"
 ALEGRA_EMAIL = os.getenv("ALEGRA_EMAIL", "")
 ALEGRA_TOKEN = os.getenv("ALEGRA_TOKEN", "")
 ALEGRA_API = "https://api.alegra.com/api/v1"
 
-# Catálogo de productos (código → id Alegra, precio)
-PRODUCTOS = {
-    "PTB01": {"id": 64, "nombre": "Golden Ale 330ml", "precio": 8500},
-    "PTB02": {"id": 65, "nombre": "Irish Red Ale 330ml", "precio": 8500},
-    "PTB03": {"id": 66, "nombre": "APA 330ml", "precio": 8500},
-    "PTB04": {"id": 67, "nombre": "IPA 330ml", "precio": 9500},
-    "PTB05": {"id": 68, "nombre": "Stout 330ml", "precio": 8500},
-    "PTL01": {"id": 69, "nombre": "Golden Ale (litro)", "precio": 18000},
-    "PTL02": {"id": 70, "nombre": "Irish Red (litro)", "precio": 18000},
-    "PTL03": {"id": 71, "nombre": "APA (litro)", "precio": 18000},
-    "PTL04": {"id": 72, "nombre": "IPA (litro)", "precio": 19000},
-    "PTL05": {"id": 73, "nombre": "Stout (litro)", "precio": 18000},
-    "DOM01": {"id": 58, "nombre": "Domicilio", "precio": 12000},
-    "TAX": 4,  # IVA
+SHEET_REMISIONES = "1hBicxCSwnZpreEPmru_ZScZQjuHPXcRQBiWatC8AC1Q"
+SHEET_INVENTARIO = "1UHqPRV1stpnM5VHer9-8Z0H_UW0omiSoape7cIwzCGA"
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ESTADO = os.path.join(HERE, "emitidas.json")
+
+# código → (id Alegra, precio, estilo)
+MAPEO = {
+    "PTB01": ("64", 8500, "GOLDEN ALE"), "PTB02": ("65", 8500, "IRISH RED ALE"),
+    "PTB03": ("66", 8500, "APA"), "PTB04": ("67", 9500, "IPA"),
+    "PTB05": ("68", 8500, "STOUT"),
+    "PTL01": ("69", 18000, "GOLDEN ALE"), "PTL02": ("70", 18000, "IRISH RED ALE"),
+    "PTL03": ("71", 18000, "APA"), "PTL04": ("72", 19000, "IPA"),
+    "PTL05": ("73", 18000, "STOUT"), "DOM01": ("58", 12000, "DOMICILIO"),
 }
+ESTILOS = ["GOLDEN ALE", "IRISH RED ALE", "APA", "IPA", "STOUT"]
 
-dry_run = "--dry-run" in sys.argv
+# columnas del Sheet de Remisiones (0-indexed)
+C_MARCA, C_CLIENTE, C_DOM, C_FACTURAR, C_VALOR_DOM, C_FACTURADO = 0, 2, 19, 22, 24, 26
+PARES_PROD = [(5, 6), (8, 9), (11, 12), (14, 15), (17, 18)]
 
 
-def alegra_request(method, path, data=None):
-    """Llama a la API de Alegra."""
+def log(msg):
+    print(msg, flush=True)
+
+
+# ── Alegra (urllib + Basic auth) ──
+def _auth_header():
+    raw = f"{ALEGRA_EMAIL}:{ALEGRA_TOKEN}".encode()
+    return "Basic " + base64.b64encode(raw).decode()
+
+
+def alegra(method, path, data=None):
     url = f"{ALEGRA_API}/{path}"
-    auth = urllib.request.HTTPBasicAuth(ALEGRA_EMAIL, ALEGRA_TOKEN)
-    headers = {"Content-Type": "application/json"}
-
-    body = None
-    if data is not None:
-        body = json.dumps(data).encode()
-
-    req = urllib.request.Request(url, data=body, headers=headers, method=method)
-    try:
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())
-    except urllib.error.HTTPError as e:
-        err = json.loads(e.read())
-        logger.error(f"Alegra API error {e.code}: {err}")
-        return None
+    body = json.dumps(data).encode() if data is not None else None
+    req = urllib.request.Request(url, data=body, method=method, headers={
+        "Authorization": _auth_header(),
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    })
+    for intento in range(1, 4):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                time.sleep(2 ** intento); continue
+            log(f"   ❌ Alegra {e.code}: {e.read()[:200]}")
+            return None
+        except Exception as e:
+            log(f"   ❌ Alegra intento {intento}: {e}")
+            time.sleep(intento)
+    return None
 
 
 def buscar_cliente(nombre):
-    """Busca un cliente en Alegra por nombre."""
-    resp = alegra_request("GET", f"contacts?query={urllib.parse.quote(nombre)}&limit=5")
-    if resp and resp.get("data"):
-        for c in resp["data"]:
-            if nombre.lower() in (c.get("name", "").lower()):
-                return c
+    q = urllib.parse.quote(nombre)
+    res = alegra("GET", f"contacts?name={q}&limit=5")
+    if isinstance(res, list) and res:
+        for c in res:
+            if nombre.lower() in (c.get("name", "") or "").lower():
+                return c["id"]
+        return res[0]["id"]
     return None
 
 
-def descargar_consolidado():
-    """Descarga el CSV desde Google Sheets."""
-    url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
-    logger.info(f"Descargando consolidado...")
-    with urllib.request.urlopen(url) as resp:
-        return resp.read().decode("utf-8-sig")
+# ── Google Sheets (CSV público, sin credenciales) ──
+def leer_sheet(sheet_id):
+    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        text = r.read().decode("utf-8-sig")
+    return list(csv.reader(io.StringIO(text)))
 
 
-def leer_pendientes(csv_text):
-    """Lee las filas pendientes de facturar del CSV."""
-    reader = csv.DictReader(io.StringIO(csv_text))
-    pendientes = []
+def _f(val, d=0):
+    try:
+        return float(str(val).replace(",", "."))
+    except Exception:
+        return d
 
-    for row in reader:
-        fecha = row.get("Fecha", "").strip()
-        cliente = row.get("Nombre de cliente", "").strip()
-        factura = row.get("Número de factura", "").strip()
-        valor_str = row.get("Valor de la factura", "").strip()
-        domicilio_str = row.get("Valor del domicilio", "").strip()
-        observaciones = row.get("Observaciones", "").strip().lower()
 
-        # Saltar si ya fue procesada
-        if "emitido" in observaciones or "procesado" in observaciones:
+def get_inventario():
+    """Lee la última fila del inventario. Robusto a cambios de columnas:
+    detecta el estilo y el tipo (Botella/Litro) por la etiqueta de cada
+    columna ESTILO y toma el valor de la columna CANTIDAD anterior."""
+    rows = leer_sheet(SHEET_INVENTARIO)
+    inv = {e: {"bot": 0, "litros": 0} for e in ESTILOS}
+    last = None
+    for r in reversed(rows):
+        if any(c.strip() for c in r):
+            last = r
+            break
+    if not last:
+        return inv
+    for j, cell in enumerate(last):
+        up = cell.strip().upper()
+        if not up or j == 0:
             continue
-
-        if not cliente or not factura:
+        estilo = next((e for e in ESTILOS if e in up), None)
+        if not estilo:
             continue
+        val = _f(last[j - 1]) if j - 1 >= 0 else 0
+        if "BOTELLA" in up:
+            inv[estilo]["bot"] += val
+        elif "LITRO" in up:
+            inv[estilo]["litros"] += val
+    return inv
 
+
+def verificar_stock(ref, cant, inv):
+    if ref == "DOM01" or ref not in MAPEO:
+        return True, "OK"
+    estilo = MAPEO[ref][2]
+    st = inv.get(estilo, {})
+    if ref.startswith("PTB"):
+        disp = st.get("bot", 0)
+        return (cant <= disp), f"{estilo}: {cant} bot pedidas / {int(disp)} disp"
+    if ref.startswith("PTL"):
+        disp = st.get("litros", 0)
+        return (cant <= disp), f"{estilo}: {cant}L pedidos / {disp}L disp"
+    return True, "OK"
+
+
+def extraer_items(row):
+    items = []
+    for pc, cc in PARES_PROD:
+        if pc >= len(row) or cc >= len(row):
+            continue
+        m = None
+        cel = row[pc].strip()
+        for ref in MAPEO:
+            if ref in cel:
+                m = ref; break
+        if not m:
+            continue
+        cant = _f(row[cc].strip(), 0)
+        if cant > 0:
+            pid, precio, _ = MAPEO[m]
+            items.append({"ref": m, "id": pid, "quantity": cant, "price": precio,
+                          "tax": [{"id": 4}] if pid != "58" else []})
+    return items
+
+
+def clave_fila(row):
+    marca = row[C_MARCA].strip() if len(row) > C_MARCA else ""
+    if marca:
+        return marca
+    return "h:" + hashlib.sha1(("|".join(row)).encode()).hexdigest()[:16]
+
+
+def cargar_estado():
+    if os.path.exists(ESTADO):
         try:
-            valor = float(valor_str.replace(".", "").replace(",", "."))
-        except ValueError:
-            valor = 0
-
-        try:
-            domicilio = float(domicilio_str.replace(".", "").replace(",", "."))
-        except ValueError:
-            domicilio = 0
-
-        pendientes.append({
-            "fecha": fecha,
-            "cliente": cliente.strip(),
-            "factura": factura.strip(),
-            "valor": int(valor),
-            "domicilio": int(domicilio),
-        })
-
-    return pendientes
-
-
-def crear_factura_alegra(cliente_nombre, items, total):
-    """Crea una factura en Alegra."""
-    cliente = buscar_cliente(cliente_nombre)
-    if not cliente:
-        logger.error(f"Cliente no encontrado: {cliente_nombre}")
-        return None
-
-    line_items = []
-    for item in items:
-        prod = PRODUCTOS.get(item["codigo"])
-        if not prod:
-            logger.warning(f"Producto no encontrado: {item['codigo']}")
-            continue
-        line_items.append({
-            "id": prod["id"],
-            "quantity": item["cantidad"],
-            "price": prod["precio"],
-            "tax": [{"id": TAX["id"] if isinstance(TAX, dict) else 4}],
-        })
-
-    payload = {
-        "client": {"id": cliente["id"]},
-        "items": line_items,
-        "dueDate": (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d"),
-        "status": "draft",
-        "paymentForm": "CASH",
-    }
-
-    if dry_run:
-        logger.info(f"[DRY RUN] Factura para {cliente_nombre}: {len(line_items)} items, ${total:,.0f}")
-        return {"id": "dry-run"}
-
-    resp = alegra_request("POST", "invoices", payload)
-    if resp:
-        logger.info(f"✅ Factura creada: FE-{resp.get('id')} para {cliente_nombre}")
-        return resp
-    return None
+            return json.load(open(ESTADO, encoding="utf-8"))
+        except Exception:
+            pass
+    return {"emitidas": [], "facturas": []}
 
 
 def main():
     if not ALEGRA_EMAIL or not ALEGRA_TOKEN:
-        logger.error("❌ Configura ALEGRA_EMAIL y ALEGRA_TOKEN como variables de entorno")
+        log("❌ Faltan ALEGRA_EMAIL / ALEGRA_TOKEN")
         sys.exit(1)
 
-    # 1. Leer consolidado
-    csv_text = descargar_consolidado()
-    pendientes = leer_pendientes(csv_text)
+    log("=" * 55)
+    log(f"🍺 EMISIÓN DE FACTURAS — Madre Monte {'(DRY-RUN)' if DRY else ''}")
+    log("=" * 55)
 
-    if not pendientes:
-        logger.info("✅ No hay facturas pendientes. Todo al día.")
-        return
+    inv = get_inventario()
+    if inv:
+        for e, d in inv.items():
+            log(f"   📦 {e}: {int(d['bot'])} bot, {d['litros']}L")
+    else:
+        log("   ⚠️ Inventario vacío o inaccesible")
 
-    logger.info(f"📋 {len(pendientes)} facturas pendientes por emitir")
+    estado = cargar_estado()
+    ya = set(estado["emitidas"])
 
-    # 2. Procesar cada una
-    exitosas = 0
-    fallidas = 0
+    rows = leer_sheet(SHEET_REMISIONES)
+    if len(rows) < 2:
+        log("Sin datos en Remisiones."); return
+    data = rows[1:]
 
-    for p in pendientes:
-        logger.info(f"\n📄 {p['factura']} — {p['cliente']} — ${p['valor']:,}")
+    nuevas = sin_stock = ya_emit = sin_cliente = 0
+    creadas = []
 
-        items = []
-        # Intentar inferir productos del valor
-        # (En una versión completa, el formulario incluiría códigos de producto)
-        valor_total = p["valor"]
+    for i, row in enumerate(data, start=2):
+        # marcado como facturar = sí
+        if C_FACTURAR >= len(row) or row[C_FACTURAR].strip().lower() not in ("si", "sí", "true", "1"):
+            continue
+        # ya facturado en el Sheet (columna AA)
+        if C_FACTURADO < len(row) and row[C_FACTURADO].strip().lower() not in ("", "no", "false", "0"):
+            ya_emit += 1; continue
+        # ya emitido por nosotros antes (idempotencia)
+        key = clave_fila(row)
+        if key in ya:
+            ya_emit += 1; continue
 
-        # Si el valor tiene domicilio incluido, separarlo
-        if p["domicilio"] > 0:
-            items.append({"codigo": "DOM01", "cantidad": 1})
-            valor_total -= PRODUCTOS["DOM01"]["precio"]
+        cliente = row[C_CLIENTE].strip() if C_CLIENTE < len(row) else ""
+        if not cliente:
+            continue
 
-        # Distribuir el valor restante entre posibles productos
-        # (Simplificación: asumimos que el valor ya viene calculado)
-        if valor_total > 0:
-            # Buscar el producto más probable según el valor
-            for codigo, prod in sorted(PRODUCTOS.items(), key=lambda x: -x[1]["precio"]):
-                if codigo == "DOM01":
-                    continue
-                if valor_total >= prod["precio"] and valor_total % prod["precio"] == 0:
-                    cant = valor_total // prod["precio"]
-                    items.append({"codigo": codigo, "cantidad": cant})
-                    break
-            else:
-                # No se pudo inferir — crear un item genérico
-                items.append({"codigo": "PTB01", "cantidad": round(valor_total / PRODUCTOS["PTB01"]["precio"])})
+        items = extraer_items(row)
+        # domicilio
+        if C_DOM < len(row) and row[C_DOM].strip().lower() in ("se incluye", "si", "sí", "1"):
+            pdom = 12000
+            if C_VALOR_DOM < len(row) and row[C_VALOR_DOM].strip():
+                v = _f(row[C_VALOR_DOM].strip(), 12)
+                pdom = v * 1000 if v < 100 else v
+            items.append({"ref": "DOM01", "id": "58", "quantity": 1, "price": pdom, "tax": []})
+        if not items:
+            continue
 
-        resultado = crear_factura_alegra(p["cliente"], items, p["valor"])
-        if resultado:
-            exitosas += 1
+        # inventario
+        ok_stock = True
+        for it in items:
+            ok, msg = verificar_stock(it["ref"], it["quantity"], inv)
+            if not ok:
+                log(f"   ⛔ Fila {i} {cliente}: {msg}")
+                ok_stock = False
+        if not ok_stock:
+            sin_stock += 1; continue
+
+        # cliente en Alegra
+        cid = buscar_cliente(cliente)
+        if not cid:
+            log(f"   ❓ Cliente no encontrado en Alegra: {cliente}")
+            sin_cliente += 1; continue
+
+        resumen = ", ".join(f"{it['ref']}x{int(it['quantity'])}" for it in items)
+        if DRY:
+            log(f"   [DRY] {cliente}: {resumen}")
+            nuevas += 1
+            continue
+
+        payload = {
+            "client": cid,
+            "date": datetime.now().strftime("%Y-%m-%d"),
+            "dueDate": (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d"),
+            "items": [{"id": it["id"], "quantity": it["quantity"], "price": it["price"], "tax": it["tax"]} for it in items],
+            "paymentForm": "CASH", "paymentMethod": "CASH", "status": "draft",
+        }
+        fac = alegra("POST", "invoices", payload)
+        if fac and fac.get("id"):
+            log(f"   ✅ Factura {fac['id']} — {cliente} ({resumen})")
+            creadas.append({"id": fac["id"], "cliente": cliente,
+                            "total": fac.get("total", 0), "fecha": datetime.now().isoformat()})
+            estado["emitidas"].append(key)
+            nuevas += 1
         else:
-            fallidas += 1
+            log(f"   ❌ Error creando factura de {cliente}")
 
-    logger.info(f"\n✅ {exitosas} facturas emitidas, ❌ {fallidas} fallidas")
+    log("=" * 55)
+    log(f"📊 RESUMEN: ✅ {nuevas} emitidas | ⛔ {sin_stock} sin stock | "
+        f"❓ {sin_cliente} sin cliente | ⏭️ {ya_emit} ya estaban")
+    log("=" * 55)
+
+    if not DRY and creadas:
+        estado["facturas"] = (estado.get("facturas", []) + creadas)[-500:]
+        with open(ESTADO, "w", encoding="utf-8") as f:
+            json.dump(estado, f, ensure_ascii=False, indent=2)
+
+    # salida para el workflow
+    gh = os.environ.get("GITHUB_OUTPUT")
+    if gh:
+        with open(gh, "a") as f:
+            f.write(f"nuevas={nuevas}\n")
+            f.write(f"resumen={nuevas} emitidas, {sin_stock} sin stock, {sin_cliente} sin cliente, {ya_emit} ya estaban\n")
 
 
 if __name__ == "__main__":

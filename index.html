@@ -96,6 +96,8 @@ h1{font-size:1.8em;color:#f0c040;margin-bottom:4px}
 
 <script>
 const CLAVE = 'MadreMonte2026';
+const REPO = 'johnnyartesano26/crear-factura';
+const WORKFLOW = 'emitir.yml';
 
 function validarClave() {
   const input = document.getElementById('claveInput').value;
@@ -108,76 +110,78 @@ function validarClave() {
   }
 }
 
+function getGhToken() {
+  let t = localStorage.getItem('gh_token');
+  if (!t) {
+    t = prompt('Pega tu token de GitHub (permiso Actions en crear-factura).\nSe guarda SOLO en este navegador, nunca se sube al repositorio:');
+    if (t) { t = t.trim(); localStorage.setItem('gh_token', t); }
+  }
+  return t;
+}
+
 async function emitirFactura() {
   const btn = document.getElementById('btnEmitir');
   const box = document.getElementById('statusBox');
 
+  const token = getGhToken();
+  if (!token) {
+    box.className = 'status-box show';
+    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Necesitas un token de GitHub para emitir.</div>';
+    return;
+  }
+
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Procesando...';
+  btn.innerHTML = '<span class="spinner"></span> Emitiendo...';
   box.className = 'status-box show';
-  box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Conectando con el sistema de facturación...</p>';
+  box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Lanzando emisión en la nube...</p>';
 
   try {
-    // 1. Descargar el consolidado para ver pendientes
-    const SHEET_ID = '1WFq09-LDg4le6FqC9BnBZfKZXSmb8Kn195wnFZaEMys';
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv';
-
-    const resp = await fetch(csvUrl);
-    if (!resp.ok) throw new Error('No se pudo acceder al formulario');
-
-    const csvText = await resp.text();
-    const lines = csvText.split('\n');
-
-    let pendientes = [];
-    for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split(',');
-      if (cols.length < 5) continue;
-
-      const cliente = (cols[2] || '').trim();
-      const factura = (cols[3] || '').trim();
-      const valor = (cols[4] || '').trim();
-      const observaciones = (cols[6] || '').toLowerCase().trim();
-
-      if (observaciones.includes('emitido') || observaciones.includes('procesado')) continue;
-      if (!cliente || !factura) continue;
-
-      const v = parseInt(valor.replace(/[^0-9]/g, '')) || 0;
-      pendientes.push({ factura, cliente, valor: v });
-    }
-
-    if (pendientes.length === 0) {
-      box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> No hay facturas pendientes. Todo al día.</div>';
-      btn.disabled = false;
-      btn.innerHTML = '⚡ Emitir';
-      setTimeout(() => { box.className = 'status-box'; }, 3000);
-      return;
-    }
-
-    // 2. Mostrar resumen
-    let html = '<div style="padding:12px"><p style="color:#f0c040;margin-bottom:8px">📋 <strong>' + pendientes.length + '</strong> facturas pendientes:</p>';
-    html += '<div style="max-height:180px;overflow:auto;text-align:left;font-size:.82em;background:rgba(0,0,0,.2);border-radius:8px;padding:8px">';
-    pendientes.forEach(f => {
-      html += '<div style="padding:4px 8px;border-bottom:1px solid rgba(255,255,255,.05)">' +
-        '<strong>' + f.factura + '</strong> — ' + f.cliente +
-        ' — $' + f.valor.toLocaleString('es-CO') + '</div>';
+    // 1. Disparar el workflow
+    const disp = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`, {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' },
+      body: JSON.stringify({ ref: 'main' })
     });
-    html += '</div>';
 
-    // 3. Link para ejecutar
-    html += '<p style="margin-top:14px;font-size:.9em">⚡ Para emitir, ejecuta el workflow:</p>';
-    html += '<a href="https://github.com/johnnyartesano26/crear-factura/actions/workflows/emitir.yml" target="_blank" ' +
-      'style="display:inline-block;margin-top:8px;padding:10px 20px;background:#3fb950;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">' +
-      '▶️ Ejecutar Emisión</a>';
-    html += '<p style="margin-top:8px;font-size:.75em;color:#8b949e">O ejecuta desde tu terminal: <code style="background:rgba(255,255,255,.1);padding:2px 6px;border-radius:4px">python emitir.py</code></p>';
-    html += '</div>';
+    if (disp.status === 401 || disp.status === 403) {
+      localStorage.removeItem('gh_token');
+      throw new Error('Token inválido o sin permisos. Vuelve a intentar e ingrésalo de nuevo.');
+    }
+    if (disp.status !== 204) {
+      throw new Error('No se pudo lanzar (HTTP ' + disp.status + ').');
+    }
 
-    box.innerHTML = html;
-    btn.innerHTML = '✅ Listo para emitir';
+    // 2. Esperar a que aparezca y termine la ejecución
+    box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Procesando facturas en Alegra... (puede tardar ~1 min)</p>';
+    const t0 = Date.now();
+    let run = null;
+    while (Date.now() - t0 < 150000) {
+      await new Promise(r => setTimeout(r, 5000));
+      const rr = await fetch(`https://api.github.com/repos/${REPO}/actions/runs?event=workflow_dispatch&per_page=1`, {
+        headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' }
+      });
+      const data = await rr.json();
+      run = (data.workflow_runs || [])[0];
+      if (run && run.status === 'completed') break;
+    }
 
-  } catch(e) {
-    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error: ' + e.message + '</div>';
-    btn.disabled = false;
+    if (run && run.conclusion === 'success') {
+      box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> <strong>Facturas emitidas.</strong><br>' +
+        '<span style="font-size:.85em;color:#8b949e">Se crearon como borrador en Alegra. Revisa el detalle en Alegra o en Telegram.</span><br>' +
+        '<a href="https://app.alegra.com/user/login/country/colombia" target="_blank" style="display:inline-block;margin-top:10px;padding:8px 16px;background:#3fb950;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">🔗 Ver en Alegra</a></div>';
+      btn.innerHTML = '⚡ Emitir de nuevo';
+    } else if (run && run.conclusion) {
+      throw new Error('La emisión terminó con estado: ' + run.conclusion + '. Revisa los logs en Actions.');
+    } else {
+      box.innerHTML = '<div style="padding:12px"><span style="color:#f0c040">⏳</span> La emisión sigue en curso. ' +
+        '<a href="https://github.com/' + REPO + '/actions/workflows/' + WORKFLOW + '" target="_blank" style="color:#3fb950">Ver progreso en Actions</a></div>';
+      btn.innerHTML = '⚡ Emitir';
+    }
+  } catch (e) {
+    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> ' + e.message + '</div>';
     btn.innerHTML = '⚡ Reintentar';
+  } finally {
+    btn.disabled = false;
   }
 }
 </script>
