@@ -19,7 +19,7 @@ jobs:
       - name: Instalar dependencias
         run: pip install google-auth google-api-python-client
 
-      - name: Emitir facturas (Remisiones + Inventario → Alegra + descuento de stock)
+      - name: Emitir facturas (Remisiones + Inventario -> Alegra + descuento de stock)
         id: emitir
         env:
           ALEGRA_EMAIL: ${{ secrets.ALEGRA_EMAIL }}
@@ -35,11 +35,9 @@ jobs:
           RESUMEN: ${{ steps.emitir.outputs.resumen }}
         run: |
           if [ -n "$TG" ]; then
+            MSG=$(printf '🧾 <b>Emisión de facturas — Madre Monte</b>\n%s\n📦 Inventario descontado automáticamente.\n🔗 https://app.alegra.com' "${RESUMEN:-Proceso ejecutado (ver logs).}")
             curl -s -X POST "https://api.telegram.org/bot$TG/sendMessage" \
               --data-urlencode chat_id="$CID" \
               --data-urlencode parse_mode="HTML" \
-              --data-urlencode text="🧾 <b>Emisión de facturas — Madre Monte</b>
-${RESUMEN:-Proceso ejecutado (ver logs).}
-📦 Inventario descontado automáticamente.
-🔗 https://app.alegra.com" > /dev/null || true
+              --data-urlencode text="$MSG" > /dev/null || true
           fi
