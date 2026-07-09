@@ -25,6 +25,21 @@ from datetime import datetime, timedelta
 from google.oauth2 import service_account
 from google.auth.transport.requests import Request
 import googleapiclient.discovery
+import googleapiclient.errors
+
+
+def gexec(req, tries=5):
+    """Ejecuta una petición de Google API con reintentos ante errores
+    transitorios (429/5xx como el 503 'service unavailable')."""
+    for intento in range(1, tries + 1):
+        try:
+            return req.execute()
+        except googleapiclient.errors.HttpError as e:
+            code = getattr(e.resp, "status", None)
+            if str(code) in ("429", "500", "502", "503", "504") and intento < tries:
+                time.sleep(2 ** intento)
+                continue
+            raise
 
 DRY = "--dry-run" in sys.argv
 
@@ -78,11 +93,11 @@ def col_letter(idx):  # 0-based → A1
 
 
 def leer_valores(svc, sid):
-    return svc.spreadsheets().values().get(spreadsheetId=sid, range=RANGE).execute().get("values", [])
+    return gexec(svc.spreadsheets().values().get(spreadsheetId=sid, range=RANGE)).get("values", [])
 
 
 def tab_name(svc, sid):
-    m = svc.spreadsheets().get(spreadsheetId=sid, fields="sheets.properties.title").execute()
+    m = gexec(svc.spreadsheets().get(spreadsheetId=sid, fields="sheets.properties.title"))
     return m["sheets"][0]["properties"]["title"]
 
 
@@ -261,9 +276,9 @@ def main():
             creadas.append({"id": fac["id"], "cliente": cliente, "total": fac.get("total", 0)})
             # marcar Facturado (col AA)
             try:
-                svc.spreadsheets().values().update(
+                gexec(svc.spreadsheets().values().update(
                     spreadsheetId=SHEET_REMISIONES, range=f"AA{i}",
-                    valueInputOption="USER_ENTERED", body={"values": [[f"Facturado {fac['id']}"]]}).execute()
+                    valueInputOption="USER_ENTERED", body={"values": [[f"Facturado {fac['id']}"]]}))
             except Exception as e:
                 log(f"   ⚠️ No se pudo marcar AA fila {i}: {e}")
 
@@ -291,9 +306,9 @@ def main():
             for est, d in cambios.items():
                 log(f"   {est}: -{int(d['bot'])} bot, -{d['litros']}L  →  queda {int(stock[est]['bot'])} bot, {stock[est]['litros']}L")
         elif updates:
-            svc.spreadsheets().values().batchUpdate(
+            gexec(svc.spreadsheets().values().batchUpdate(
                 spreadsheetId=SHEET_INVENTARIO,
-                body={"valueInputOption": "USER_ENTERED", "data": updates}).execute()
+                body={"valueInputOption": "USER_ENTERED", "data": updates}))
             log("\n📉 Inventario actualizado (descontado) en el Sheet.")
 
     log("=" * 56)
