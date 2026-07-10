@@ -76,6 +76,7 @@ h1{font-size:1.8em;color:#f0c040;margin-bottom:4px}
 <div class="step-num">2</div>
 <h3>Emitir Factura</h3>
 <p>Procesa los datos del formulario y genera la factura electrónica en Alegra. Este paso se ejecuta desde cualquier equipo.</p>
+<input type="password" id="claveEmitir" placeholder="Clave de emisión" style="width:100%;padding:10px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-family:inherit;text-align:center;margin-bottom:12px" onkeydown="if(event.key==='Enter')emitirFactura()">
 <button class="btn btn-primary btn-large" onclick="emitirFactura()" id="btnEmitir">
 ⚡ Emitir
 </button>
@@ -96,6 +97,9 @@ h1{font-size:1.8em;color:#f0c040;margin-bottom:4px}
 
 <script>
 const CLAVE = 'MadreMonte2026';
+// URL de la Web App de Google Apps Script (backend que guarda el token de GitHub).
+// Pega aquí la URL /exec que te da Apps Script al implementar.
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbxgN_ivkv3rlETiLd8Sl6EG5Nk7BWYh_rpDHu48T6JWDxz4iil3F721GgNcNpODwHwi/exec';
 const REPO = 'johnnyartesano26/crear-factura';
 const WORKFLOW = 'emitir.yml';
 
@@ -110,23 +114,16 @@ function validarClave() {
   }
 }
 
-function getGhToken() {
-  let t = localStorage.getItem('gh_token');
-  if (!t) {
-    t = prompt('Pega tu token de GitHub (permiso Actions en crear-factura).\nSe guarda SOLO en este navegador, nunca se sube al repositorio:');
-    if (t) { t = t.trim(); localStorage.setItem('gh_token', t); }
-  }
-  return t;
-}
-
 async function emitirFactura() {
   const btn = document.getElementById('btnEmitir');
   const box = document.getElementById('statusBox');
+  const claveInput = document.getElementById('claveEmitir');
 
-  const token = getGhToken();
-  if (!token) {
+  const clave = (claveInput.value || '').trim();
+  if (!clave) {
     box.className = 'status-box show';
-    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Necesitas un token de GitHub para emitir.</div>';
+    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Ingresa la clave de emisión.</div>';
+    claveInput.focus();
     return;
   }
 
@@ -136,47 +133,25 @@ async function emitirFactura() {
   box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Lanzando emisión en la nube...</p>';
 
   try {
-    // 1. Disparar el workflow
-    const disp = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`, {
+    // 1. Pedir al backend que dispare el workflow (el token vive en el backend)
+    const disp = await fetch(BACKEND_URL, {
       method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' },
-      body: JSON.stringify({ ref: 'main' })
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ clave: clave })
     });
+    const result = await disp.json();
 
-    if (disp.status === 401 || disp.status === 403) {
-      localStorage.removeItem('gh_token');
-      throw new Error('Token inválido o sin permisos. Vuelve a intentar e ingrésalo de nuevo.');
+    if (!result.ok) {
+      throw new Error(result.error || 'No se pudo lanzar la emisión.');
     }
-    if (disp.status !== 204) {
-      throw new Error('No se pudo lanzar (HTTP ' + disp.status + ').');
-    }
+    claveInput.value = '';
 
-    // 2. Esperar a que aparezca y termine la ejecución
-    box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Procesando facturas en Alegra... (puede tardar ~1 min)</p>';
-    const t0 = Date.now();
-    let run = null;
-    while (Date.now() - t0 < 150000) {
-      await new Promise(r => setTimeout(r, 5000));
-      const rr = await fetch(`https://api.github.com/repos/${REPO}/actions/runs?event=workflow_dispatch&per_page=1`, {
-        headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' }
-      });
-      const data = await rr.json();
-      run = (data.workflow_runs || [])[0];
-      if (run && run.status === 'completed') break;
-    }
-
-    if (run && run.conclusion === 'success') {
-      box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> <strong>Facturas emitidas.</strong><br>' +
-        '<span style="font-size:.85em;color:#8b949e">Se crearon como borrador en Alegra. Revisa el detalle en Alegra o en Telegram.</span><br>' +
-        '<a href="https://app.alegra.com/user/login/country/colombia" target="_blank" style="display:inline-block;margin-top:10px;padding:8px 16px;background:#3fb950;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">🔗 Ver en Alegra</a></div>';
-      btn.innerHTML = '⚡ Emitir de nuevo';
-    } else if (run && run.conclusion) {
-      throw new Error('La emisión terminó con estado: ' + run.conclusion + '. Revisa los logs en Actions.');
-    } else {
-      box.innerHTML = '<div style="padding:12px"><span style="color:#f0c040">⏳</span> La emisión sigue en curso. ' +
-        '<a href="https://github.com/' + REPO + '/actions/workflows/' + WORKFLOW + '" target="_blank" style="color:#3fb950">Ver progreso en Actions</a></div>';
-      btn.innerHTML = '⚡ Emitir';
-    }
+    // 2. Confirmación (el backend ya disparó el workflow correctamente)
+    box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> <strong>Emisión lanzada.</strong><br>' +
+      '<span style="font-size:.85em;color:#8b949e">Las facturas se están creando como borrador en Alegra (~1 min). Recibirás aviso por Telegram al terminar.</span><br>' +
+      '<a href="https://app.alegra.com/user/login/country/colombia" target="_blank" style="display:inline-block;margin-top:10px;padding:8px 16px;background:#3fb950;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">🔗 Ver en Alegra</a> ' +
+      '<a href="https://github.com/' + REPO + '/actions/workflows/' + WORKFLOW + '" target="_blank" style="display:inline-block;margin-top:10px;padding:8px 16px;background:rgba(255,255,255,.12);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">📋 Ver progreso</a></div>';
+    btn.innerHTML = '⚡ Emitir de nuevo';
   } catch (e) {
     box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> ' + e.message + '</div>';
     btn.innerHTML = '⚡ Reintentar';
