@@ -102,10 +102,17 @@ const CLAVE = 'MadreMonte2026';
 const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbxgN_ivkv3rlETiLd8Sl6EG5Nk7BWYh_rpDHu48T6JWDxz4iil3F721GgNcNpODwHwi/exec';
 const REPO = 'johnnyartesano26/crear-factura';
 const WORKFLOW = 'emitir.yml';
+const SESION_MS = 120 * 60 * 1000; // 120 minutos
+
+function sesionActiva() {
+  const t = parseInt(localStorage.getItem('cf_login_ts') || '0', 10);
+  return t && (Date.now() - t) < SESION_MS;
+}
 
 function validarClave() {
   const input = document.getElementById('claveInput').value;
   if (input === CLAVE) {
+    localStorage.setItem('cf_login_ts', Date.now().toString());
     document.getElementById('loginOverlay').style.display = 'none';
   } else {
     document.getElementById('loginError').style.display = 'block';
@@ -113,6 +120,12 @@ function validarClave() {
     document.getElementById('claveInput').focus();
   }
 }
+
+window.addEventListener('DOMContentLoaded', function() {
+  if (sesionActiva()) {
+    document.getElementById('loginOverlay').style.display = 'none';
+  }
+});
 
 async function emitirFactura() {
   const btn = document.getElementById('btnEmitir');
