@@ -2,6 +2,8 @@ name: Emitir Facturas
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 14 * * *'  # 9 AM Colombia (UTC-5) todos los días
 
 permissions:
   contents: read
