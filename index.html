@@ -112,6 +112,14 @@ async function emitirFactura() {
   const btn = document.getElementById('btnEmitir');
   const box = document.getElementById('statusBox');
 
+  // Si no hay token guardado, pedirlo
+  let TOKEN = sessionStorage.getItem('gh_token');
+  if (!TOKEN) {
+    TOKEN = prompt('Ingresa tu GitHub Personal Access Token (solo una vez por sesión):');
+    if (!TOKEN) { box.innerHTML = '<p style="color:#f85149">❌ Token requerido para emitir facturas.</p>'; box.className = 'status-box show'; return; }
+    sessionStorage.setItem('gh_token', TOKEN);
+  }
+
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Procesando...';
   box.className = 'status-box show';
@@ -163,12 +171,12 @@ async function emitirFactura() {
     });
     html += '</div>';
 
-    // 3. Botón directo para disparar el workflow en GitHub (1 clic)
+    // 3. Disparar workflow directamente via API
     html += '<p style="margin-top:14px;font-size:.9em">⚡ Emitir facturas automáticamente:</p>';
-    html += '<a href="https://github.com/johnnyartesano26/crear-factura/actions/workflows/emitir.yml" target="_blank" ' +
-      'style="display:inline-block;margin-top:8px;padding:12px 28px;background:#3fb950;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;text-decoration:none;cursor:pointer">' +
-      '▶️ Emitir Ahora</a>';
-    html += '<p style="margin-top:6px;font-size:.75em;color:#8b949e">Se abre GitHub Actions → haz clic en <strong>"Run workflow"</strong> verde</p>';
+    html += '<button onclick="dispararWorkflow()" ' +
+      'style="display:inline-block;margin-top:8px;padding:12px 28px;background:#3fb950;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer">' +
+      '▶️ Emitir Ahora</button>';
+    html += '<div id="workflowStatus" style="margin-top:10px"></div>';
     html += '</div>';
 
     box.innerHTML = html;
@@ -178,6 +186,38 @@ async function emitirFactura() {
     box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error: ' + e.message + '</div>';
     btn.disabled = false;
     btn.innerHTML = '⚡ Reintentar';
+  }
+}
+
+async function dispararWorkflow() {
+  const statusEl = document.getElementById('workflowStatus');
+  statusEl.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Enviando a Alegra...</p>';
+
+  try {
+    const TOKEN = sessionStorage.getItem('gh_token');
+    const resp = await fetch(
+      'https://api.github.com/repos/johnnyartesano26/crear-factura/actions/workflows/emitir.yml/dispatches',
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + TOKEN,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ref: 'main' })
+      }
+    );
+
+    if (resp.ok || resp.status === 204) {
+      statusEl.innerHTML = '<p style="color:#3fb950;margin-top:8px">✅ Facturas enviadas a Alegra. Revisa Telegram en unos minutos.</p>' +
+        '<p style="font-size:.8em;color:#8b949e;margin-top:4px">' +
+        '<a href="https://github.com/johnnyartesano26/crear-factura/actions" target="_blank" style="color:#58a6ff">Ver en GitHub Actions ↗</a></p>';
+    } else {
+      const errBody = await resp.text();
+      throw new Error('HTTP ' + resp.status + ': ' + errBody.substring(0, 200));
+    }
+  } catch(e) {
+    statusEl.innerHTML = '<p style="color:#f85149;margin-top:8px">❌ ' + e.message + '</p>';
   }
 }
 </script>

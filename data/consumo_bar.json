@@ -1,0 +1,5917 @@
+{
+  "diario": [
+    {
+      "fecha": "2026-01-02",
+      "estilo": "Golden",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-02",
+      "estilo": "Ipa",
+      "litros": 5.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-02",
+      "estilo": "Stout",
+      "litros": 3.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-02",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-02",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-03",
+      "estilo": "Ipa",
+      "litros": 10.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-03",
+      "estilo": "Stout",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-03",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-04",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-04",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-05",
+      "estilo": "Golden",
+      "litros": 7.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-05",
+      "estilo": "Irish",
+      "litros": 13.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-05",
+      "estilo": "Apa",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-05",
+      "estilo": "Ipa",
+      "litros": 14.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-05",
+      "estilo": "Stout",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-05",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-06",
+      "estilo": "Golden",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-06",
+      "estilo": "Irish",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-06",
+      "estilo": "Apa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-06",
+      "estilo": "Ipa",
+      "litros": 2.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-06",
+      "estilo": "Stout",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-06",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-07",
+      "estilo": "Golden",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-07",
+      "estilo": "Irish",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-07",
+      "estilo": "Apa",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-07",
+      "estilo": "Ipa",
+      "litros": 4.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-07",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-07",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-08",
+      "estilo": "Golden",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-08",
+      "estilo": "Irish",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-08",
+      "estilo": "Apa",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-08",
+      "estilo": "Ipa",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-08",
+      "estilo": "Stout",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-08",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-09",
+      "estilo": "Golden",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-09",
+      "estilo": "Irish",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-09",
+      "estilo": "Apa",
+      "litros": 4.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-09",
+      "estilo": "Stout",
+      "litros": 5.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-09",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-10",
+      "estilo": "Golden",
+      "litros": 4.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-10",
+      "estilo": "Irish",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-10",
+      "estilo": "Apa",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-10",
+      "estilo": "Ipa",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-10",
+      "estilo": "Stout",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-10",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-11",
+      "estilo": "Golden",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-11",
+      "estilo": "Irish",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-11",
+      "estilo": "Apa",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-11",
+      "estilo": "Ipa",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-11",
+      "estilo": "Stout",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-13",
+      "estilo": "Golden",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-13",
+      "estilo": "Irish",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-13",
+      "estilo": "Ipa",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-13",
+      "estilo": "Stout",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-13",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-14",
+      "estilo": "Golden",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-14",
+      "estilo": "Irish",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-14",
+      "estilo": "Apa",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-14",
+      "estilo": "Ipa",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-14",
+      "estilo": "Stout",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-14",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-15",
+      "estilo": "Golden",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-15",
+      "estilo": "Irish",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-15",
+      "estilo": "Apa",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-15",
+      "estilo": "Ipa",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-15",
+      "estilo": "Stout",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-15",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-16",
+      "estilo": "Golden",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-16",
+      "estilo": "Irish",
+      "litros": 5.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-16",
+      "estilo": "Apa",
+      "litros": 7.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-16",
+      "estilo": "Stout",
+      "litros": 6.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-16",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-16",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-17",
+      "estilo": "Golden",
+      "litros": 6.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-17",
+      "estilo": "Irish",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-17",
+      "estilo": "Apa",
+      "litros": 9.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-17",
+      "estilo": "Stout",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-17",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-17",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-18",
+      "estilo": "Golden",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-18",
+      "estilo": "Irish",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-18",
+      "estilo": "Apa",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-18",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-18",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-18",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-20",
+      "estilo": "Golden",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-20",
+      "estilo": "Irish",
+      "litros": 12.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-20",
+      "estilo": "Apa",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-20",
+      "estilo": "Stout",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-20",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-21",
+      "estilo": "Golden",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-21",
+      "estilo": "Irish",
+      "litros": 6.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-21",
+      "estilo": "Apa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-21",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-21",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-22",
+      "estilo": "Golden",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-22",
+      "estilo": "Irish",
+      "litros": 14.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-22",
+      "estilo": "Apa",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-22",
+      "estilo": "Stout",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-22",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-23",
+      "estilo": "Golden",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-23",
+      "estilo": "Irish",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-23",
+      "estilo": "Apa",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-23",
+      "estilo": "Stout",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-23",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-23",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-24",
+      "estilo": "Irish",
+      "litros": 4.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-24",
+      "estilo": "Apa",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-24",
+      "estilo": "Stout",
+      "litros": 4.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-24",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-24",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-25",
+      "estilo": "Irish",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-25",
+      "estilo": "Apa",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-25",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-25",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-27",
+      "estilo": "Golden",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-27",
+      "estilo": "Irish",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-27",
+      "estilo": "Apa",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-27",
+      "estilo": "Ipa",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-27",
+      "estilo": "Stout",
+      "litros": 2.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-27",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-28",
+      "estilo": "Golden",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-28",
+      "estilo": "Irish",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-28",
+      "estilo": "Apa",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-28",
+      "estilo": "Ipa",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-28",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-28",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-29",
+      "estilo": "Golden",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-29",
+      "estilo": "Irish",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-29",
+      "estilo": "Apa",
+      "litros": 7.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-29",
+      "estilo": "Ipa",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-29",
+      "estilo": "Stout",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-29",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-30",
+      "estilo": "Golden",
+      "litros": 2.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-30",
+      "estilo": "Irish",
+      "litros": 5.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-30",
+      "estilo": "Apa",
+      "litros": 7.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-30",
+      "estilo": "Ipa",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-30",
+      "estilo": "Stout",
+      "litros": 3.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-30",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-30",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-31",
+      "estilo": "Golden",
+      "litros": 5.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-31",
+      "estilo": "Irish",
+      "litros": 3.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-31",
+      "estilo": "Apa",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-31",
+      "estilo": "Ipa",
+      "litros": 8.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-31",
+      "estilo": "Stout",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-01-31",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-01",
+      "estilo": "Golden",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-01",
+      "estilo": "Apa",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-01",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-01",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-03",
+      "estilo": "Golden",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-03",
+      "estilo": "Apa",
+      "litros": 8.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-03",
+      "estilo": "Ipa",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-03",
+      "estilo": "Stout",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-03",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-04",
+      "estilo": "Golden",
+      "litros": 3.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-04",
+      "estilo": "Apa",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-04",
+      "estilo": "Ipa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-04",
+      "estilo": "Stout",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-04",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-05",
+      "estilo": "Golden",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-05",
+      "estilo": "Apa",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-05",
+      "estilo": "Ipa",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-05",
+      "estilo": "Stout",
+      "litros": 3.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-05",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-06",
+      "estilo": "Golden",
+      "litros": 14.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-06",
+      "estilo": "Irish",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-06",
+      "estilo": "Apa",
+      "litros": 9.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-06",
+      "estilo": "Ipa",
+      "litros": 10.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-06",
+      "estilo": "Stout",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-06",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-06",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-07",
+      "estilo": "Golden",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-07",
+      "estilo": "Irish",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-07",
+      "estilo": "Apa",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-07",
+      "estilo": "Ipa",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-07",
+      "estilo": "Stout",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-07",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-08",
+      "estilo": "Irish",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-08",
+      "estilo": "Apa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-08",
+      "estilo": "Ipa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-08",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-08",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-10",
+      "estilo": "Golden",
+      "litros": 4.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-10",
+      "estilo": "Irish",
+      "litros": 5.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-10",
+      "estilo": "Apa",
+      "litros": 7.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-10",
+      "estilo": "Ipa",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-10",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-10",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-11",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-11",
+      "estilo": "Irish",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-11",
+      "estilo": "Apa",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-11",
+      "estilo": "Ipa",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-11",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-11",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-12",
+      "estilo": "Golden",
+      "litros": 3.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-12",
+      "estilo": "Irish",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-12",
+      "estilo": "Apa",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-12",
+      "estilo": "Ipa",
+      "litros": 7.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-12",
+      "estilo": "Stout",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-12",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-13",
+      "estilo": "Golden",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-13",
+      "estilo": "Irish",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-13",
+      "estilo": "Apa",
+      "litros": 6.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-13",
+      "estilo": "Ipa",
+      "litros": 5.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-13",
+      "estilo": "Stout",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-13",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-13",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-14",
+      "estilo": "Golden",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-14",
+      "estilo": "Irish",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-14",
+      "estilo": "Apa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-14",
+      "estilo": "Ipa",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-14",
+      "estilo": "Stout",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-14",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-15",
+      "estilo": "Golden",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-15",
+      "estilo": "Irish",
+      "litros": 14.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-15",
+      "estilo": "Apa",
+      "litros": 6.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-15",
+      "estilo": "Ipa",
+      "litros": 6.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-15",
+      "estilo": "Stout",
+      "litros": 5.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-15",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-15",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-17",
+      "estilo": "Golden",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-17",
+      "estilo": "Irish",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-17",
+      "estilo": "Apa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-17",
+      "estilo": "Ipa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-17",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-17",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-17",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-18",
+      "estilo": "Golden",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-18",
+      "estilo": "Irish",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-18",
+      "estilo": "Apa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-18",
+      "estilo": "Ipa",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-18",
+      "estilo": "Stout",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-19",
+      "estilo": "Golden",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-19",
+      "estilo": "Irish",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-19",
+      "estilo": "Apa",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-19",
+      "estilo": "Ipa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-19",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-19",
+      "estilo": "Hidromiel",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-20",
+      "estilo": "Golden",
+      "litros": 6.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-20",
+      "estilo": "Irish",
+      "litros": 7.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-20",
+      "estilo": "Apa",
+      "litros": 9.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-20",
+      "estilo": "Ipa",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-20",
+      "estilo": "Stout",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-20",
+      "estilo": "Hidromiel",
+      "litros": 3.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-21",
+      "estilo": "Golden",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-21",
+      "estilo": "Irish",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-21",
+      "estilo": "Apa",
+      "litros": 7.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-21",
+      "estilo": "Ipa",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-21",
+      "estilo": "Stout",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-21",
+      "estilo": "Hidromiel",
+      "litros": 2.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-22",
+      "estilo": "Golden",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-22",
+      "estilo": "Irish",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-22",
+      "estilo": "Apa",
+      "litros": 3.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-22",
+      "estilo": "Ipa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-22",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-22",
+      "estilo": "Hidromiel",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-24",
+      "estilo": "Golden",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-24",
+      "estilo": "Irish",
+      "litros": 3.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-24",
+      "estilo": "Apa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-24",
+      "estilo": "Ipa",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-24",
+      "estilo": "Stout",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-24",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-25",
+      "estilo": "Golden",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-25",
+      "estilo": "Irish",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-25",
+      "estilo": "Apa",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-25",
+      "estilo": "Ipa",
+      "litros": 4.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-25",
+      "estilo": "Stout",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-25",
+      "estilo": "Hidromiel",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-26",
+      "estilo": "Golden",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-26",
+      "estilo": "Irish",
+      "litros": 6.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-26",
+      "estilo": "Apa",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-26",
+      "estilo": "Ipa",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-26",
+      "estilo": "Stout",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-26",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-27",
+      "estilo": "Golden",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-27",
+      "estilo": "Irish",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-27",
+      "estilo": "Apa",
+      "litros": 6.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-27",
+      "estilo": "Ipa",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-27",
+      "estilo": "Stout",
+      "litros": 11.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-27",
+      "estilo": "Hidromiel",
+      "litros": 6.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-27",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-28",
+      "estilo": "Golden",
+      "litros": 8.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-28",
+      "estilo": "Irish",
+      "litros": 10.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-28",
+      "estilo": "Apa",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-28",
+      "estilo": "Ipa",
+      "litros": 5.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-28",
+      "estilo": "Stout",
+      "litros": 10.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-28",
+      "estilo": "Hidromiel",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-28",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-02-28",
+      "estilo": "Cervezas Especiales (Poder R)",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-01",
+      "estilo": "Golden",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-01",
+      "estilo": "Irish",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-01",
+      "estilo": "Apa",
+      "litros": 2.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-01",
+      "estilo": "Ipa",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-01",
+      "estilo": "Stout",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-01",
+      "estilo": "Hidromiel",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-03",
+      "estilo": "Irish",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-03",
+      "estilo": "Apa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-03",
+      "estilo": "Ipa",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-03",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-03",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-03",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-04",
+      "estilo": "Irish",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-04",
+      "estilo": "Apa",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-04",
+      "estilo": "Ipa",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-04",
+      "estilo": "Stout",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-04",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-04",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-05",
+      "estilo": "Irish",
+      "litros": 1.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-05",
+      "estilo": "Apa",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-05",
+      "estilo": "Ipa",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-05",
+      "estilo": "Stout",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-05",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-06",
+      "estilo": "Irish",
+      "litros": 5.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-06",
+      "estilo": "Apa",
+      "litros": 7.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-06",
+      "estilo": "Ipa",
+      "litros": 7.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-06",
+      "estilo": "Stout",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-06",
+      "estilo": "Hidromiel",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-06",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-07",
+      "estilo": "Irish",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-07",
+      "estilo": "Apa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-07",
+      "estilo": "Ipa",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-07",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-07",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-07",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-10",
+      "estilo": "Golden",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-10",
+      "estilo": "Irish",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-10",
+      "estilo": "Apa",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-10",
+      "estilo": "Ipa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-10",
+      "estilo": "Stout",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-10",
+      "estilo": "Hidromiel",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-10",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-11",
+      "estilo": "Irish",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-11",
+      "estilo": "Apa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-11",
+      "estilo": "Ipa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-11",
+      "estilo": "Stout",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-11",
+      "estilo": "Hidromiel",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-11",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-12",
+      "estilo": "Golden",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-12",
+      "estilo": "Irish",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-12",
+      "estilo": "Apa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-12",
+      "estilo": "Ipa",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-12",
+      "estilo": "Stout",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-12",
+      "estilo": "Hidromiel",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-12",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-13",
+      "estilo": "Golden",
+      "litros": 3.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-13",
+      "estilo": "Apa",
+      "litros": 5.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-13",
+      "estilo": "Ipa",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-13",
+      "estilo": "Stout",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-13",
+      "estilo": "Hidromiel",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-13",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-14",
+      "estilo": "Golden",
+      "litros": 1.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-14",
+      "estilo": "Apa",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-14",
+      "estilo": "Ipa",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-14",
+      "estilo": "Stout",
+      "litros": 1.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-14",
+      "estilo": "Hidromiel",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-14",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-15",
+      "estilo": "Golden",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-15",
+      "estilo": "Apa",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-15",
+      "estilo": "Ipa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-15",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-15",
+      "estilo": "Hidromiel",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-16",
+      "estilo": "Golden",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-16",
+      "estilo": "Apa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-16",
+      "estilo": "Ipa",
+      "litros": 9.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-16",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-16",
+      "estilo": "Hidromiel",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-17",
+      "estilo": "Golden",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-17",
+      "estilo": "Apa",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-17",
+      "estilo": "Ipa",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-17",
+      "estilo": "Stout",
+      "litros": 6.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-17",
+      "estilo": "Hidromiel",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-17",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-18",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-18",
+      "estilo": "Apa",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-18",
+      "estilo": "Ipa",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-18",
+      "estilo": "Stout",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-18",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-18",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-19",
+      "estilo": "Golden",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-19",
+      "estilo": "Irish",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-19",
+      "estilo": "Apa",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-19",
+      "estilo": "Ipa",
+      "litros": 3.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-19",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-19",
+      "estilo": "Hidromiel",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-19",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-20",
+      "estilo": "Golden",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-20",
+      "estilo": "Irish",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-20",
+      "estilo": "Apa",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-20",
+      "estilo": "Ipa",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-20",
+      "estilo": "Stout",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-20",
+      "estilo": "Hidromiel",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-20",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-21",
+      "estilo": "Golden",
+      "litros": 15.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-21",
+      "estilo": "Irish",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-21",
+      "estilo": "Apa",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-21",
+      "estilo": "Ipa",
+      "litros": 7.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-21",
+      "estilo": "Stout",
+      "litros": 10.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-21",
+      "estilo": "Hidromiel",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-21",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-22",
+      "estilo": "Golden",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-22",
+      "estilo": "Irish",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-22",
+      "estilo": "Apa",
+      "litros": 3.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-22",
+      "estilo": "Ipa",
+      "litros": 8.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-22",
+      "estilo": "Stout",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-22",
+      "estilo": "Hidromiel",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-22",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-24",
+      "estilo": "Golden",
+      "litros": 3.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-24",
+      "estilo": "Irish",
+      "litros": 3.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-24",
+      "estilo": "Ipa",
+      "litros": 7.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-24",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-24",
+      "estilo": "Hidromiel",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-25",
+      "estilo": "Golden",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-25",
+      "estilo": "Irish",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-25",
+      "estilo": "Ipa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-25",
+      "estilo": "Stout",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-25",
+      "estilo": "Hidromiel",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-25",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-26",
+      "estilo": "Golden",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-26",
+      "estilo": "Irish",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-26",
+      "estilo": "Ipa",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-26",
+      "estilo": "Stout",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-26",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-26",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-27",
+      "estilo": "Golden",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-27",
+      "estilo": "Irish",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-27",
+      "estilo": "Ipa",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-27",
+      "estilo": "Stout",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-27",
+      "estilo": "Hidromiel",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-27",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-28",
+      "estilo": "Golden",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-28",
+      "estilo": "Irish",
+      "litros": 9.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-28",
+      "estilo": "Ipa",
+      "litros": 6.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-28",
+      "estilo": "Stout",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-28",
+      "estilo": "Hidromiel",
+      "litros": 6.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-28",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-29",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-29",
+      "estilo": "Irish",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-29",
+      "estilo": "Ipa",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-29",
+      "estilo": "Stout",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-29",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-31",
+      "estilo": "Golden",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-31",
+      "estilo": "Irish",
+      "litros": 6.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-31",
+      "estilo": "Ipa",
+      "litros": 12.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-31",
+      "estilo": "Stout",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-31",
+      "estilo": "Hidromiel",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-03-31",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-01",
+      "estilo": "Golden",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-01",
+      "estilo": "Irish",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-01",
+      "estilo": "Ipa",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-01",
+      "estilo": "Stout",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-01",
+      "estilo": "Hidromiel",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-02",
+      "estilo": "Golden",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-02",
+      "estilo": "Irish",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-02",
+      "estilo": "Ipa",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-02",
+      "estilo": "Stout",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-02",
+      "estilo": "Hidromiel",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-03",
+      "estilo": "Golden",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-03",
+      "estilo": "Irish",
+      "litros": 4.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-03",
+      "estilo": "Ipa",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-03",
+      "estilo": "Stout",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-03",
+      "estilo": "Hidromiel",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-04",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-04",
+      "estilo": "Irish",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-04",
+      "estilo": "Ipa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-04",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-04",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-05",
+      "estilo": "Golden",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-05",
+      "estilo": "Irish",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-05",
+      "estilo": "Ipa",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-05",
+      "estilo": "Stout",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-05",
+      "estilo": "Hidromiel",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-07",
+      "estilo": "Golden",
+      "litros": 6.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-07",
+      "estilo": "Irish",
+      "litros": 9.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-07",
+      "estilo": "Ipa",
+      "litros": 11.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-07",
+      "estilo": "Stout",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-07",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-08",
+      "estilo": "Golden",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-08",
+      "estilo": "Irish",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-08",
+      "estilo": "Ipa",
+      "litros": 5.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-08",
+      "estilo": "Stout",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-08",
+      "estilo": "Hidromiel",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-09",
+      "estilo": "Golden",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-09",
+      "estilo": "Irish",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-09",
+      "estilo": "Ipa",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-09",
+      "estilo": "Stout",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-09",
+      "estilo": "Hidromiel",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-10",
+      "estilo": "Golden",
+      "litros": 7.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-10",
+      "estilo": "Irish",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-10",
+      "estilo": "Ipa",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-10",
+      "estilo": "Stout",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-10",
+      "estilo": "Hidromiel",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-11",
+      "estilo": "Golden",
+      "litros": 3.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-11",
+      "estilo": "Irish",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-11",
+      "estilo": "Ipa",
+      "litros": 12.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-11",
+      "estilo": "Stout",
+      "litros": 3.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-11",
+      "estilo": "Hidromiel",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-12",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-12",
+      "estilo": "Irish",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-12",
+      "estilo": "Ipa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-12",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-12",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-14",
+      "estilo": "Golden",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-14",
+      "estilo": "Irish",
+      "litros": 3.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-14",
+      "estilo": "Ipa",
+      "litros": 10.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-14",
+      "estilo": "Stout",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-14",
+      "estilo": "Hidromiel",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-15",
+      "estilo": "Golden",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-15",
+      "estilo": "Irish",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-15",
+      "estilo": "Ipa",
+      "litros": 9.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-15",
+      "estilo": "Stout",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-15",
+      "estilo": "Hidromiel",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-16",
+      "estilo": "Golden",
+      "litros": 3.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-16",
+      "estilo": "Irish",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-16",
+      "estilo": "Ipa",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-16",
+      "estilo": "Stout",
+      "litros": 6.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-16",
+      "estilo": "Hidromiel",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-16",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-17",
+      "estilo": "Golden",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-17",
+      "estilo": "Irish",
+      "litros": 17.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-17",
+      "estilo": "Ipa",
+      "litros": 38.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-17",
+      "estilo": "Stout",
+      "litros": 7.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-17",
+      "estilo": "Hidromiel",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-17",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-18",
+      "estilo": "Golden",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-18",
+      "estilo": "Irish",
+      "litros": 7.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-18",
+      "estilo": "Ipa",
+      "litros": 5.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-18",
+      "estilo": "Stout",
+      "litros": 7.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-18",
+      "estilo": "Hidromiel",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-18",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-19",
+      "estilo": "Golden",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-19",
+      "estilo": "Irish",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-19",
+      "estilo": "Ipa",
+      "litros": 4.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-19",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-21",
+      "estilo": "Golden",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-21",
+      "estilo": "Irish",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-21",
+      "estilo": "Apa",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-21",
+      "estilo": "Ipa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-21",
+      "estilo": "Stout",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-21",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-22",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-22",
+      "estilo": "Apa",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-22",
+      "estilo": "Ipa",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-22",
+      "estilo": "Stout",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-23",
+      "estilo": "Golden",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-23",
+      "estilo": "Irish",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-23",
+      "estilo": "Apa",
+      "litros": 5.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-23",
+      "estilo": "Ipa",
+      "litros": 8.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-23",
+      "estilo": "Stout",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-24",
+      "estilo": "Golden",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-24",
+      "estilo": "Irish",
+      "litros": 8.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-24",
+      "estilo": "Apa",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-24",
+      "estilo": "Ipa",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-24",
+      "estilo": "Stout",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-24",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-25",
+      "estilo": "Golden",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-25",
+      "estilo": "Irish",
+      "litros": 7.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-25",
+      "estilo": "Apa",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-25",
+      "estilo": "Ipa",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-25",
+      "estilo": "Stout",
+      "litros": 4.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-25",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-26",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-26",
+      "estilo": "Irish",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-26",
+      "estilo": "Apa",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-26",
+      "estilo": "Ipa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-26",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-26",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-28",
+      "estilo": "Golden",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-28",
+      "estilo": "Irish",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-28",
+      "estilo": "Apa",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-28",
+      "estilo": "Ipa",
+      "litros": 5.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-28",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-28",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-29",
+      "estilo": "Golden",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-29",
+      "estilo": "Irish",
+      "litros": 6.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-29",
+      "estilo": "Apa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-29",
+      "estilo": "Ipa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-29",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-29",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-30",
+      "estilo": "Golden",
+      "litros": 5.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-30",
+      "estilo": "Irish",
+      "litros": 12.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-30",
+      "estilo": "Apa",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-30",
+      "estilo": "Ipa",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-04-30",
+      "estilo": "Stout",
+      "litros": 7.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-01",
+      "estilo": "Golden",
+      "litros": 2.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-01",
+      "estilo": "Irish",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-01",
+      "estilo": "Apa",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-01",
+      "estilo": "Ipa",
+      "litros": 5.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-01",
+      "estilo": "Stout",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-01",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-02",
+      "estilo": "Golden",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-02",
+      "estilo": "Irish",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-02",
+      "estilo": "Apa",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-02",
+      "estilo": "Ipa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-02",
+      "estilo": "Stout",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-02",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-03",
+      "estilo": "Golden",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-03",
+      "estilo": "Irish",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-03",
+      "estilo": "Apa",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-03",
+      "estilo": "Ipa",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-03",
+      "estilo": "Stout",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-05",
+      "estilo": "Golden",
+      "litros": 6.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-05",
+      "estilo": "Irish",
+      "litros": 9.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-05",
+      "estilo": "Apa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-05",
+      "estilo": "Ipa",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-05",
+      "estilo": "Stout",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-05",
+      "estilo": "Hidromiel",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-06",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-06",
+      "estilo": "Irish",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-06",
+      "estilo": "Apa",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-06",
+      "estilo": "Ipa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-06",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-06",
+      "estilo": "Hidromiel",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-07",
+      "estilo": "Golden",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-07",
+      "estilo": "Irish",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-07",
+      "estilo": "Apa",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-07",
+      "estilo": "Ipa",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-07",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-07",
+      "estilo": "Hidromiel",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-08",
+      "estilo": "Golden",
+      "litros": 8.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-08",
+      "estilo": "Irish",
+      "litros": 8.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-08",
+      "estilo": "Apa",
+      "litros": 7.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-08",
+      "estilo": "Ipa",
+      "litros": 11.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-08",
+      "estilo": "Stout",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-08",
+      "estilo": "Hidromiel",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-09",
+      "estilo": "Golden",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-09",
+      "estilo": "Irish",
+      "litros": 5.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-09",
+      "estilo": "Apa",
+      "litros": 2.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-09",
+      "estilo": "Ipa",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-09",
+      "estilo": "Stout",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-09",
+      "estilo": "Hidromiel",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-10",
+      "estilo": "Irish",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-10",
+      "estilo": "Apa",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-10",
+      "estilo": "Ipa",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-12",
+      "estilo": "Golden",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-12",
+      "estilo": "Irish",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-12",
+      "estilo": "Apa",
+      "litros": 8.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-12",
+      "estilo": "Ipa",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-12",
+      "estilo": "Stout",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-12",
+      "estilo": "Hidromiel",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-13",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-13",
+      "estilo": "Irish",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-13",
+      "estilo": "Apa",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-13",
+      "estilo": "Ipa",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-13",
+      "estilo": "Stout",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-13",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-14",
+      "estilo": "Golden",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-14",
+      "estilo": "Irish",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-14",
+      "estilo": "Apa",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-14",
+      "estilo": "Ipa",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-14",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-14",
+      "estilo": "Hidromiel",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-15",
+      "estilo": "Golden",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-15",
+      "estilo": "Irish",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-15",
+      "estilo": "Apa",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-15",
+      "estilo": "Ipa",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-15",
+      "estilo": "Stout",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-15",
+      "estilo": "Hidromiel",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-15",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-16",
+      "estilo": "Golden",
+      "litros": 2.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-16",
+      "estilo": "Irish",
+      "litros": 9.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-16",
+      "estilo": "Apa",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-16",
+      "estilo": "Ipa",
+      "litros": 3.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-16",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-16",
+      "estilo": "Hidromiel",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-16",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-17",
+      "estilo": "Golden",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-17",
+      "estilo": "Irish",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-17",
+      "estilo": "Apa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-17",
+      "estilo": "Ipa",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-17",
+      "estilo": "Stout",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-17",
+      "estilo": "Hidromiel",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-17",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-19",
+      "estilo": "Golden",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-19",
+      "estilo": "Irish",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-19",
+      "estilo": "Apa",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-19",
+      "estilo": "Ipa",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-19",
+      "estilo": "Stout",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-19",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-20",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-20",
+      "estilo": "Irish",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-20",
+      "estilo": "Apa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-20",
+      "estilo": "Ipa",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-20",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-20",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-21",
+      "estilo": "Golden",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-21",
+      "estilo": "Irish",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-21",
+      "estilo": "Apa",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-21",
+      "estilo": "Ipa",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-21",
+      "estilo": "Stout",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-21",
+      "estilo": "Hidromiel",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-21",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-22",
+      "estilo": "Golden",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-22",
+      "estilo": "Irish",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-22",
+      "estilo": "Apa",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-22",
+      "estilo": "Ipa",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-22",
+      "estilo": "Stout",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-22",
+      "estilo": "Hidromiel",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-22",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-23",
+      "estilo": "Golden",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-23",
+      "estilo": "Irish",
+      "litros": 7.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-23",
+      "estilo": "Apa",
+      "litros": 1.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-23",
+      "estilo": "Ipa",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-23",
+      "estilo": "Stout",
+      "litros": 5.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-23",
+      "estilo": "Hidromiel",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-23",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-24",
+      "estilo": "Golden",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-24",
+      "estilo": "Irish",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-24",
+      "estilo": "Apa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-24",
+      "estilo": "Ipa",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-24",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-24",
+      "estilo": "Hidromiel",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-24",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-26",
+      "estilo": "Golden",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-26",
+      "estilo": "Irish",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-26",
+      "estilo": "Apa",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-26",
+      "estilo": "Ipa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-26",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-26",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-26",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-27",
+      "estilo": "Golden",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-27",
+      "estilo": "Irish",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-27",
+      "estilo": "Apa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-27",
+      "estilo": "Ipa",
+      "litros": 2.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-27",
+      "estilo": "Stout",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-27",
+      "estilo": "Hidromiel",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-27",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-28",
+      "estilo": "Golden",
+      "litros": 6.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-28",
+      "estilo": "Irish",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-28",
+      "estilo": "Apa",
+      "litros": 7.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-28",
+      "estilo": "Ipa",
+      "litros": 8.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-28",
+      "estilo": "Stout",
+      "litros": 5.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-28",
+      "estilo": "Hidromiel",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-28",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-29",
+      "estilo": "Golden",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-29",
+      "estilo": "Irish",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-29",
+      "estilo": "Apa",
+      "litros": 2.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-29",
+      "estilo": "Ipa",
+      "litros": 3.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-29",
+      "estilo": "Stout",
+      "litros": 3.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-29",
+      "estilo": "Hidromiel",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-29",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-30",
+      "estilo": "Irish",
+      "litros": 7.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-30",
+      "estilo": "Apa",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-30",
+      "estilo": "Ipa",
+      "litros": 1.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-05-30",
+      "estilo": "Stout",
+      "litros": 5.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-01",
+      "estilo": "Golden",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-01",
+      "estilo": "Irish",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-01",
+      "estilo": "Ipa",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-01",
+      "estilo": "Stout",
+      "litros": 1.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-01",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-02",
+      "estilo": "Irish",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-02",
+      "estilo": "Apa",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-02",
+      "estilo": "Ipa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-02",
+      "estilo": "Stout",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-03",
+      "estilo": "Golden",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-03",
+      "estilo": "Irish",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-03",
+      "estilo": "Apa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-03",
+      "estilo": "Ipa",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-03",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-04",
+      "estilo": "Golden",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-04",
+      "estilo": "Irish",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-04",
+      "estilo": "Apa",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-04",
+      "estilo": "Ipa",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-04",
+      "estilo": "Stout",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-04",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Golden",
+      "litros": 5.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Irish",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Apa",
+      "litros": 3.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Ipa",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Stout",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Apa",
+      "litros": 18.7,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Irish",
+      "litros": 18.1,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-05",
+      "estilo": "Stout",
+      "litros": 18.6,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-06",
+      "estilo": "Golden",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-06",
+      "estilo": "Irish",
+      "litros": 15.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-06",
+      "estilo": "Apa",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-06",
+      "estilo": "Ipa",
+      "litros": 5.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-06",
+      "estilo": "Stout",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-06",
+      "estilo": "Hidromiel",
+      "litros": 7.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-06",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-07",
+      "estilo": "Golden",
+      "litros": 3.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-07",
+      "estilo": "Irish",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-07",
+      "estilo": "Apa",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-07",
+      "estilo": "Ipa",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-07",
+      "estilo": "Stout",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-07",
+      "estilo": "Hidromiel",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-07",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Golden",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Irish",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Apa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Ipa",
+      "litros": 6.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Hidromiel",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Apa",
+      "litros": 18.5,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-09",
+      "estilo": "Irish",
+      "litros": 8.3,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-10",
+      "estilo": "Golden",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-10",
+      "estilo": "Irish",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-10",
+      "estilo": "Apa",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-10",
+      "estilo": "Ipa",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-10",
+      "estilo": "Stout",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-10",
+      "estilo": "Hidromiel",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-10",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-10",
+      "estilo": "Apa",
+      "litros": 9.2,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-11",
+      "estilo": "Golden",
+      "litros": 3.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-11",
+      "estilo": "Irish",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-11",
+      "estilo": "Apa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-11",
+      "estilo": "Ipa",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-11",
+      "estilo": "Stout",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-11",
+      "estilo": "Hidromiel",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-11",
+      "estilo": "Apa",
+      "litros": 28.6,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Golden",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Irish",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Apa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Ipa",
+      "litros": 1.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Stout",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Hidromiel",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Hidromiel",
+      "litros": 8.3,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-12",
+      "estilo": "Ipa",
+      "litros": 15.2,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Golden",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Irish",
+      "litros": 9.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Apa",
+      "litros": 3.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Ipa",
+      "litros": 6.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Stout",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Hidromiel",
+      "litros": 3.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 3.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Apa",
+      "litros": 18.7,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-13",
+      "estilo": "Irish",
+      "litros": 18.6,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-14",
+      "estilo": "Golden",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-14",
+      "estilo": "Irish",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-14",
+      "estilo": "Apa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-14",
+      "estilo": "Ipa",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-14",
+      "estilo": "Stout",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-14",
+      "estilo": "Apa",
+      "litros": 15.2,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-14",
+      "estilo": "Ipa",
+      "litros": 8.3,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-16",
+      "estilo": "Golden",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-16",
+      "estilo": "Irish",
+      "litros": 1.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-16",
+      "estilo": "Apa",
+      "litros": 0.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-16",
+      "estilo": "Ipa",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-16",
+      "estilo": "Stout",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-16",
+      "estilo": "Hidromiel",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-16",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-16",
+      "estilo": "Ipa",
+      "litros": 8.3,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-17",
+      "estilo": "Golden",
+      "litros": 6.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-17",
+      "estilo": "Irish",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-17",
+      "estilo": "Apa",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-17",
+      "estilo": "Ipa",
+      "litros": 5.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-17",
+      "estilo": "Stout",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-17",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-17",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-17",
+      "estilo": "Ipa",
+      "litros": 8.3,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-18",
+      "estilo": "Golden",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-18",
+      "estilo": "Irish",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-18",
+      "estilo": "Apa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-18",
+      "estilo": "Ipa",
+      "litros": 5.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-18",
+      "estilo": "Stout",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-18",
+      "estilo": "Ipa",
+      "litros": 8.3,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-19",
+      "estilo": "Golden",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-19",
+      "estilo": "Irish",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-19",
+      "estilo": "Apa",
+      "litros": 4.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-19",
+      "estilo": "Ipa",
+      "litros": 11.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-19",
+      "estilo": "Stout",
+      "litros": 8.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-19",
+      "estilo": "Hidromiel",
+      "litros": 2.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-19",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-19",
+      "estilo": "Stout",
+      "litros": 8.3,
+      "dinero": 0.0
+    },
+    {
+      "fecha": "2026-06-20",
+      "estilo": "Golden",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-20",
+      "estilo": "Irish",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-20",
+      "estilo": "Apa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-20",
+      "estilo": "Ipa",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-20",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-20",
+      "estilo": "Hidromiel",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-20",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-23",
+      "estilo": "Golden",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-23",
+      "estilo": "Irish",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-23",
+      "estilo": "Apa",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-23",
+      "estilo": "Ipa",
+      "litros": 7.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-23",
+      "estilo": "Stout",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-23",
+      "estilo": "Hidromiel",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-23",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-24",
+      "estilo": "Golden",
+      "litros": 1.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-24",
+      "estilo": "Irish",
+      "litros": 3.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-24",
+      "estilo": "Apa",
+      "litros": 2.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-24",
+      "estilo": "Ipa",
+      "litros": 4.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-24",
+      "estilo": "Stout",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-24",
+      "estilo": "Hidromiel",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-24",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-26",
+      "estilo": "Golden",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-26",
+      "estilo": "Irish",
+      "litros": 2.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-26",
+      "estilo": "Apa",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-26",
+      "estilo": "Ipa",
+      "litros": 8.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-26",
+      "estilo": "Stout",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-26",
+      "estilo": "Hidromiel",
+      "litros": 0.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-26",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-25",
+      "estilo": "Golden",
+      "litros": 4.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-25",
+      "estilo": "Irish",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-25",
+      "estilo": "Ipa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-25",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-27",
+      "estilo": "Irish",
+      "litros": 2.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-27",
+      "estilo": "Apa",
+      "litros": 3.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-27",
+      "estilo": "Ipa",
+      "litros": 2.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-27",
+      "estilo": "Stout",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-27",
+      "estilo": "Hidromiel",
+      "litros": 0.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-27",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-28",
+      "estilo": "Irish",
+      "litros": 0.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-28",
+      "estilo": "Apa",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-28",
+      "estilo": "Ipa",
+      "litros": 3.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-28",
+      "estilo": "Stout",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-28",
+      "estilo": "Hidromiel",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-28",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-29",
+      "estilo": "Irish",
+      "litros": 4.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-29",
+      "estilo": "Apa",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-29",
+      "estilo": "Ipa",
+      "litros": 14.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-29",
+      "estilo": "Stout",
+      "litros": 1.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-29",
+      "estilo": "Hidromiel",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-29",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-30",
+      "estilo": "Golden",
+      "litros": 6.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-30",
+      "estilo": "Irish",
+      "litros": 1.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-30",
+      "estilo": "Apa",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-30",
+      "estilo": "Ipa",
+      "litros": 6.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-30",
+      "estilo": "Stout",
+      "litros": 0.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-30",
+      "estilo": "Hidromiel",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-06-30",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Golden",
+      "litros": 5.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Irish",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Apa",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Ipa",
+      "litros": 5.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Stout",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Hidromiel",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Golden",
+      "litros": 5.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Irish",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Apa",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Ipa",
+      "litros": 5.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Stout",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Hidromiel",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Golden",
+      "litros": 5.1,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Irish",
+      "litros": 2.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Apa",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Ipa",
+      "litros": 5.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Stout",
+      "litros": 0.4,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Hidromiel",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-01",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 0.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Golden",
+      "litros": 2.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Irish",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Apa",
+      "litros": 1.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Stout",
+      "litros": 0.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-02",
+      "estilo": "Hidromiel",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-03",
+      "estilo": "Golden",
+      "litros": 17.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-03",
+      "estilo": "Irish",
+      "litros": 4.3,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-03",
+      "estilo": "Apa",
+      "litros": 3.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-03",
+      "estilo": "Ipa",
+      "litros": 8.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-03",
+      "estilo": "Stout",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-03",
+      "estilo": "Hidromiel",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-03",
+      "estilo": "Cervezas Especiales (Chope)",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-04",
+      "estilo": "Golden",
+      "litros": 1.9,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-04",
+      "estilo": "Irish",
+      "litros": 2.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-04",
+      "estilo": "Apa",
+      "litros": 5.0,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-04",
+      "estilo": "Ipa",
+      "litros": 4.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-04",
+      "estilo": "Stout",
+      "litros": 0.5,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-04",
+      "estilo": "Hidromiel",
+      "litros": 1.2,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-07",
+      "estilo": "Golden",
+      "litros": 13.6,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-07",
+      "estilo": "Irish",
+      "litros": 6.8,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-07",
+      "estilo": "Apa",
+      "litros": 7.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-07",
+      "estilo": "Ipa",
+      "litros": 12.7,
+      "dinero": 0
+    },
+    {
+      "fecha": "2026-07-07",
+      "estilo": "Stout",
+      "litros": 3.7,
+      "dinero": 0
+    }
+  ],
+  "mensual": [
+    {
+      "mes": "2026-01",
+      "estilos": {
+        "Apa": 82.0,
+        "Cervezas Especiales (Chope)": 14.9,
+        "Cervezas Especiales (Poder R)": 4.3,
+        "Golden": 70.4,
+        "Ipa": 65.7,
+        "Irish": 117.6,
+        "Stout": 56.9
+      },
+      "total_litros": 411.8
+    },
+    {
+      "mes": "2026-02",
+      "estilos": {
+        "Apa": 103.6,
+        "Cervezas Especiales (Chope)": 17.5,
+        "Cervezas Especiales (Poder R)": 2.7,
+        "Golden": 81.1,
+        "Hidromiel": 18.2,
+        "Ipa": 83.9,
+        "Irish": 80.7,
+        "Stout": 62.4
+      },
+      "total_litros": 450.1
+    },
+    {
+      "mes": "2026-03",
+      "estilos": {
+        "Apa": 53.8,
+        "Cervezas Especiales (Chope)": 17.1,
+        "Golden": 54.2,
+        "Hidromiel": 27.4,
+        "Ipa": 100.3,
+        "Irish": 64.7,
+        "Stout": 53.1
+      },
+      "total_litros": 370.6
+    },
+    {
+      "mes": "2026-04",
+      "estilos": {
+        "Apa": 20.9,
+        "Cervezas Especiales (Chope)": 18.8,
+        "Golden": 65.0,
+        "Hidromiel": 18.5,
+        "Ipa": 167.2,
+        "Irish": 120.4,
+        "Stout": 64.0
+      },
+      "total_litros": 474.8
+    },
+    {
+      "mes": "2026-05",
+      "estilos": {
+        "Apa": 62.7,
+        "Cervezas Especiales (Chope)": 12.7,
+        "Golden": 70.8,
+        "Hidromiel": 28.9,
+        "Ipa": 90.3,
+        "Irish": 92.8,
+        "Stout": 60.7
+      },
+      "total_litros": 418.9
+    },
+    {
+      "mes": "2026-06",
+      "estilos": {
+        "Apa": 157.6,
+        "Cervezas Especiales (Chope)": 26.0,
+        "Golden": 56.9,
+        "Hidromiel": 31.5,
+        "Ipa": 174.0,
+        "Irish": 130.0,
+        "Stout": 73.6
+      },
+      "total_litros": 649.6
+    },
+    {
+      "mes": "2026-07",
+      "estilos": {
+        "Apa": 23.3,
+        "Cervezas Especiales (Chope)": 3.7,
+        "Golden": 50.4,
+        "Hidromiel": 9.4,
+        "Ipa": 41.4,
+        "Irish": 23.0,
+        "Stout": 8.0
+      },
+      "total_litros": 159.2
+    }
+  ],
+  "estilos": [
+    "Apa",
+    "Cervezas Especiales (Chope)",
+    "Cervezas Especiales (Poder R)",
+    "Golden",
+    "Hidromiel",
+    "Ipa",
+    "Irish",
+    "Stout"
+  ],
+  "total_registros": 968
+}
