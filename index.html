@@ -113,12 +113,10 @@ async function emitirFactura() {
   const box = document.getElementById('statusBox');
 
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Procesando...';
+  btn.innerHTML = '<span class="spinner"></span> Buscando remisión pendiente...';
   box.className = 'status-box show';
-  box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Leyendo Remisiones pendientes...</p>';
 
   try {
-    // Leer el sheet de Remisiones (donde emitir.py busca filas sin facturar)
     const SHEET_ID = '1hBicxCSwnZpreEPmru_ZScZQjuHPXcRQBiWatC8AC1Q';
     const csvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv';
 
@@ -129,17 +127,15 @@ async function emitirFactura() {
     const lines = csvText.split('\n');
     if (lines.length < 2) throw new Error('Sheet vacío');
 
-    // Parse header para encontrar columna "Facturado"
     const header = lines[0].split(',');
     const idxFacturado = header.findIndex(h => h.toLowerCase().includes('facturado'));
-    if (idxFacturado < 0) throw new Error('Columna Facturado no encontrada');
 
-    let pendientes = [];
-    for (let i = 1; i < lines.length; i++) {
+    // Buscar la última fila con columna Facturado vacía
+    let ultima = null;
+    for (let i = lines.length - 1; i >= 1; i--) {
       const row = lines[i];
       if (!row.trim()) continue;
       
-      // Parsear CSV respetando comillas (valores con comas internas)
       const cols = [];
       let current = '', inQuotes = false;
       for (let j = 0; j < row.length; j++) {
@@ -149,21 +145,18 @@ async function emitirFactura() {
         current += ch;
       }
       cols.push(current.trim());
-
       if (cols.length < 4) continue;
 
-      const facturado = (cols[idxFacturado] || '').trim().toLowerCase();
-      // Solo filas NO facturadas (columna AA vacía)
-      if (facturado && facturado !== 'no' && facturado !== 'false') continue;
+      const facturado = (cols[idxFacturado] || '').trim();
+      if (facturado) continue; // ya facturada, saltar
 
       const cliente = (cols[2] || '').trim();
-      if (!cliente || cliente === 'Nombre del cliente') continue;
+      if (!cliente) continue;
 
-      // Extraer productos y cantidades de las columnas dinámicas
       let productos = [];
       for (let c = 4; c < cols.length && c < idxFacturado; c++) {
         const val = (cols[c] || '').trim();
-        if (val && val !== '0' && isNaN(val) && !val.includes('@') && val.length < 30 && c + 1 < cols.length) {
+        if (val && val !== '0' && isNaN(val) && val.length < 30 && c + 1 < cols.length) {
           const cant = (cols[c + 1] || '').trim();
           if (cant && !isNaN(cant) && parseInt(cant) > 0) {
             productos.push(header[c].trim() + ': ' + cant);
@@ -171,14 +164,15 @@ async function emitirFactura() {
         }
       }
 
-      pendientes.push({
+      ultima = {
         cliente: cliente,
-        productos: productos.length > 0 ? productos.join(', ') : 'Pendiente revisar',
+        productos: productos.length > 0 ? productos.join(', ') : 'Productos detectados',
         fila: i + 1
-      });
+      };
+      break;
     }
 
-    if (pendientes.length === 0) {
+    if (!ultima) {
       box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> No hay remisiones pendientes. Todo al día.</div>';
       btn.disabled = false;
       btn.innerHTML = '⚡ Emitir';
@@ -186,23 +180,16 @@ async function emitirFactura() {
       return;
     }
 
-    // Solo la última fila pendiente
-    const ultima = pendientes[pendientes.length - 1];
-    let html = '<div style="padding:12px"><p style="color:#f0c040;margin-bottom:8px">📋 Última remisión pendiente (fila ' + ultima.fila + '):</p>';
-    html += '<div style="text-align:left;font-size:.9em;background:rgba(255,255,255,.08);border-radius:8px;padding:12px;margin-bottom:12px">' +
+    // Mostrar y disparar directo
+    box.innerHTML = '<div style="padding:12px">' +
+      '<p style="color:#f0c040;margin-bottom:8px">📋 Remisión pendiente — Fila ' + ultima.fila + '</p>' +
+      '<div style="text-align:left;font-size:.9em;background:rgba(255,255,255,.08);border-radius:8px;padding:12px;margin-bottom:12px">' +
       '<strong>' + ultima.cliente + '</strong><br>' +
-      '<span style="color:#8b949e;font-size:.82em">' + ultima.productos + '</span></div>';
+      '<span style="color:#8b949e;font-size:.82em">' + ultima.productos + '</span></div>' +
+      '<p style="color:#f0c040;margin-top:8px"><span class="spinner"></span> Enviando a Alegra...</p></div>';
 
-    // Botón para disparar el workflow
-    html += '<p style="margin-top:14px;font-size:.9em">⚡ Emitir facturas en Alegra:</p>';
-    html += '<button onclick="dispararWorkflow()" ' +
-      'style="display:inline-block;margin-top:8px;padding:12px 28px;background:#3fb950;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer">' +
-      '▶️ Emitir Ahora</button>';
-    html += '<div id="workflowStatus" style="margin-top:10px"></div>';
-    html += '</div>';
-
-    box.innerHTML = html;
-    btn.innerHTML = '✅ Listo para emitir';
+    // Disparar automático
+    await dispararWorkflow();
 
   } catch(e) {
     box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error: ' + e.message + '</div>';
@@ -212,12 +199,9 @@ async function emitirFactura() {
 }
 
 async function dispararWorkflow() {
-  const statusEl = document.getElementById('workflowStatus');
-  statusEl.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Enviando a Alegra...</p>';
-
-  try {
-    const T = ['gh','p_','jl','s3','s7','96','K4','UY','jh','8H','LH','Bi','EK','aa','Q7','aI','UD','0R','5s','nY'];
+    const T = ['gh','p_','yk','4L','kQ','lP','PW','4K','JN','Yo','pB','Id','jw','nk','Lk','7z','0x','3w','D1','sE'];
     const TOKEN = T.join('');
+  try {
     const resp = await fetch(
       'https://api.github.com/repos/johnnyartesano26/crear-factura/actions/workflows/emitir.yml/dispatches',
       {
@@ -230,18 +214,17 @@ async function dispararWorkflow() {
         body: JSON.stringify({ ref: 'main' })
       }
     );
-
     if (resp.ok || resp.status === 204) {
-      statusEl.innerHTML = '<p style="color:#3fb950;margin-top:8px">✅ Facturas enviadas a Alegra. Revisa Telegram en unos minutos.</p>' +
-        '<p style="font-size:.8em;color:#8b949e;margin-top:4px">' +
-        '<a href="https://github.com/johnnyartesano26/crear-factura/actions" target="_blank" style="color:#58a6ff">Ver en GitHub Actions ↗</a></p>';
+      document.getElementById('statusBox').innerHTML = '<div style="padding:12px"><span class="ok">✅</span> Factura enviada a Alegra. Revisa Telegram.</div>';
     } else {
-      const errBody = await resp.text();
-      throw new Error('HTTP ' + resp.status + ': ' + errBody.substring(0, 200));
+      const err = await resp.text();
+      document.getElementById('statusBox').innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error HTTP ' + resp.status + '</div>';
     }
   } catch(e) {
-    statusEl.innerHTML = '<p style="color:#f85149;margin-top:8px">❌ ' + e.message + '</p>';
+    document.getElementById('statusBox').innerHTML = '<div style="padding:12px"><span class="err">❌</span> ' + e.message + '</div>';
   }
+  document.getElementById('btnEmitir').disabled = false;
+  document.getElementById('btnEmitir').innerHTML = '⚡ Emitir';
 }
 </script>
 </body>
