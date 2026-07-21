@@ -76,7 +76,6 @@ h1{font-size:1.8em;color:#f0c040;margin-bottom:4px}
 <div class="step-num">2</div>
 <h3>Emitir Factura</h3>
 <p>Procesa los datos del formulario y genera la factura electrónica en Alegra. Este paso se ejecuta desde cualquier equipo.</p>
-<input type="password" id="claveEmitir" placeholder="Clave de emisión" style="width:100%;padding:10px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-family:inherit;text-align:center;margin-bottom:12px" onkeydown="if(event.key==='Enter')emitirFactura()">
 <button class="btn btn-primary btn-large" onclick="emitirFactura()" id="btnEmitir">
 ⚡ Emitir
 </button>
@@ -97,22 +96,10 @@ h1{font-size:1.8em;color:#f0c040;margin-bottom:4px}
 
 <script>
 const CLAVE = 'MadreMonte2026';
-// URL de la Web App de Google Apps Script (backend que guarda el token de GitHub).
-// Pega aquí la URL /exec que te da Apps Script al implementar.
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbxgN_ivkv3rlETiLd8Sl6EG5Nk7BWYh_rpDHu48T6JWDxz4iil3F721GgNcNpODwHwi/exec';
-const REPO = 'johnnyartesano26/crear-factura';
-const WORKFLOW = 'emitir.yml';
-const SESION_MS = 120 * 60 * 1000; // 120 minutos
-
-function sesionActiva() {
-  const t = parseInt(localStorage.getItem('cf_login_ts') || '0', 10);
-  return t && (Date.now() - t) < SESION_MS;
-}
 
 function validarClave() {
   const input = document.getElementById('claveInput').value;
   if (input === CLAVE) {
-    localStorage.setItem('cf_login_ts', Date.now().toString());
     document.getElementById('loginOverlay').style.display = 'none';
   } else {
     document.getElementById('loginError').style.display = 'block';
@@ -121,55 +108,76 @@ function validarClave() {
   }
 }
 
-window.addEventListener('DOMContentLoaded', function() {
-  if (sesionActiva()) {
-    document.getElementById('loginOverlay').style.display = 'none';
-  }
-});
-
 async function emitirFactura() {
   const btn = document.getElementById('btnEmitir');
   const box = document.getElementById('statusBox');
-  const claveInput = document.getElementById('claveEmitir');
-
-  const clave = (claveInput.value || '').trim();
-  if (!clave) {
-    box.className = 'status-box show';
-    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Ingresa la clave de emisión.</div>';
-    claveInput.focus();
-    return;
-  }
 
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Emitiendo...';
+  btn.innerHTML = '<span class="spinner"></span> Procesando...';
   box.className = 'status-box show';
-  box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Lanzando emisión en la nube...</p>';
+  box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Conectando con el sistema de facturación...</p>';
 
   try {
-    // 1. Pedir al backend que dispare el workflow (el token vive en el backend)
-    const disp = await fetch(BACKEND_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ clave: clave })
-    });
-    const result = await disp.json();
+    // 1. Descargar el consolidado para ver pendientes
+    const SHEET_ID = '1WFq09-LDg4le6FqC9BnBZfKZXSmb8Kn195wnFZaEMys';
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv';
 
-    if (!result.ok) {
-      throw new Error(result.error || 'No se pudo lanzar la emisión.');
+    const resp = await fetch(csvUrl);
+    if (!resp.ok) throw new Error('No se pudo acceder al formulario');
+
+    const csvText = await resp.text();
+    const lines = csvText.split('\n');
+
+    let pendientes = [];
+    for (let i = 1; i < lines.length; i++) {
+      const cols = lines[i].split(',');
+      if (cols.length < 5) continue;
+
+      const cliente = (cols[2] || '').trim();
+      const factura = (cols[3] || '').trim();
+      const valor = (cols[4] || '').trim();
+      const observaciones = (cols[6] || '').toLowerCase().trim();
+
+      if (observaciones.includes('emitido') || observaciones.includes('procesado')) continue;
+      if (!cliente || !factura) continue;
+
+      const v = parseInt(valor.replace(/[^0-9]/g, '')) || 0;
+      pendientes.push({ factura, cliente, valor: v });
     }
-    claveInput.value = '';
 
-    // 2. Confirmación (el backend ya disparó el workflow correctamente)
-    box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> <strong>Emisión lanzada.</strong><br>' +
-      '<span style="font-size:.85em;color:#8b949e">Las facturas se están creando como borrador en Alegra (~1 min). Recibirás aviso por Telegram al terminar.</span><br>' +
-      '<a href="https://app.alegra.com/user/login/country/colombia" target="_blank" style="display:inline-block;margin-top:10px;padding:8px 16px;background:#3fb950;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">🔗 Ver en Alegra</a> ' +
-      '<a href="https://github.com/' + REPO + '/actions/workflows/' + WORKFLOW + '" target="_blank" style="display:inline-block;margin-top:10px;padding:8px 16px;background:rgba(255,255,255,.12);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">📋 Ver progreso</a></div>';
-    btn.innerHTML = '⚡ Emitir de nuevo';
-  } catch (e) {
-    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> ' + e.message + '</div>';
-    btn.innerHTML = '⚡ Reintentar';
-  } finally {
+    if (pendientes.length === 0) {
+      box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> No hay facturas pendientes. Todo al día.</div>';
+      btn.disabled = false;
+      btn.innerHTML = '⚡ Emitir';
+      setTimeout(() => { box.className = 'status-box'; }, 3000);
+      return;
+    }
+
+    // 2. Mostrar resumen
+    let html = '<div style="padding:12px"><p style="color:#f0c040;margin-bottom:8px">📋 <strong>' + pendientes.length + '</strong> facturas pendientes:</p>';
+    html += '<div style="max-height:180px;overflow:auto;text-align:left;font-size:.82em;background:rgba(0,0,0,.2);border-radius:8px;padding:8px">';
+    pendientes.forEach(f => {
+      html += '<div style="padding:4px 8px;border-bottom:1px solid rgba(255,255,255,.05)">' +
+        '<strong>' + f.factura + '</strong> — ' + f.cliente +
+        ' — $' + f.valor.toLocaleString('es-CO') + '</div>';
+    });
+    html += '</div>';
+
+    // 3. Botón directo para disparar el workflow en GitHub (1 clic)
+    html += '<p style="margin-top:14px;font-size:.9em">⚡ Emitir facturas automáticamente:</p>';
+    html += '<a href="https://github.com/johnnyartesano26/crear-factura/actions/workflows/emitir.yml" target="_blank" ' +
+      'style="display:inline-block;margin-top:8px;padding:12px 28px;background:#3fb950;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;text-decoration:none;cursor:pointer">' +
+      '▶️ Emitir Ahora</a>';
+    html += '<p style="margin-top:6px;font-size:.75em;color:#8b949e">Se abre GitHub Actions → haz clic en <strong>"Run workflow"</strong> verde</p>';
+    html += '</div>';
+
+    box.innerHTML = html;
+    btn.innerHTML = '✅ Listo para emitir';
+
+  } catch(e) {
+    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error: ' + e.message + '</div>';
     btn.disabled = false;
+    btn.innerHTML = '⚡ Reintentar';
   }
 }
 </script>
