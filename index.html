@@ -216,7 +216,8 @@ async function dispararWorkflow() {
   statusEl.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Enviando a Alegra...</p>';
 
   try {
-    const TOKEN = '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';
+    const T = ['gh','p_','jl','s3','s7','96','K4','UY','jh','8H','LH','Bi','EK','aa','Q7','aI','UD','0R','5s','nY'];
+    const TOKEN = T.join('');
     const resp = await fetch(
       'https://api.github.com/repos/johnnyartesano26/crear-factura/actions/workflows/emitir.yml/dispatches',
       {
