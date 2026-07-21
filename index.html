@@ -112,67 +112,92 @@ async function emitirFactura() {
   const btn = document.getElementById('btnEmitir');
   const box = document.getElementById('statusBox');
 
-  // Si no hay token guardado, pedirlo
-  let TOKEN = sessionStorage.getItem('gh_token');
-  if (!TOKEN) {
-    TOKEN = prompt('Ingresa tu GitHub Personal Access Token (solo una vez por sesión):');
-    if (!TOKEN) { box.innerHTML = '<p style="color:#f85149">❌ Token requerido para emitir facturas.</p>'; box.className = 'status-box show'; return; }
-    sessionStorage.setItem('gh_token', TOKEN);
-  }
-
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Procesando...';
   box.className = 'status-box show';
-  box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Conectando con el sistema de facturación...</p>';
+  box.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Leyendo Remisiones pendientes...</p>';
 
   try {
-    // 1. Descargar el consolidado para ver pendientes
-    const SHEET_ID = '1WFq09-LDg4le6FqC9BnBZfKZXSmb8Kn195wnFZaEMys';
+    // Leer el sheet de Remisiones (donde emitir.py busca filas sin facturar)
+    const SHEET_ID = '1hBicxCSwnZpreEPmru_ZScZQjuHPXcRQBiWatC8AC1Q';
     const csvUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv';
 
     const resp = await fetch(csvUrl);
-    if (!resp.ok) throw new Error('No se pudo acceder al formulario');
+    if (!resp.ok) throw new Error('No se pudo acceder a Remisiones');
 
     const csvText = await resp.text();
     const lines = csvText.split('\n');
+    if (lines.length < 2) throw new Error('Sheet vacío');
+
+    // Parse header para encontrar columna "Facturado"
+    const header = lines[0].split(',');
+    const idxFacturado = header.findIndex(h => h.toLowerCase().includes('facturado'));
+    if (idxFacturado < 0) throw new Error('Columna Facturado no encontrada');
 
     let pendientes = [];
     for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split(',');
-      if (cols.length < 5) continue;
+      const row = lines[i];
+      if (!row.trim()) continue;
+      
+      // Parsear CSV respetando comillas (valores con comas internas)
+      const cols = [];
+      let current = '', inQuotes = false;
+      for (let j = 0; j < row.length; j++) {
+        const ch = row[j];
+        if (ch === '"') { inQuotes = !inQuotes; continue; }
+        if (ch === ',' && !inQuotes) { cols.push(current.trim()); current = ''; continue; }
+        current += ch;
+      }
+      cols.push(current.trim());
+
+      if (cols.length < 4) continue;
+
+      const facturado = (cols[idxFacturado] || '').trim().toLowerCase();
+      // Solo filas NO facturadas (columna AA vacía)
+      if (facturado && facturado !== 'no' && facturado !== 'false') continue;
 
       const cliente = (cols[2] || '').trim();
-      const factura = (cols[3] || '').trim();
-      const valor = (cols[4] || '').trim();
-      const observaciones = (cols[6] || '').toLowerCase().trim();
+      if (!cliente || cliente === 'Nombre del cliente') continue;
 
-      if (observaciones.includes('emitido') || observaciones.includes('procesado')) continue;
-      if (!cliente || !factura) continue;
+      // Extraer productos y cantidades de las columnas dinámicas
+      let productos = [];
+      for (let c = 4; c < cols.length && c < idxFacturado; c++) {
+        const val = (cols[c] || '').trim();
+        if (val && val !== '0' && isNaN(val) && !val.includes('@') && val.length < 30 && c + 1 < cols.length) {
+          const cant = (cols[c + 1] || '').trim();
+          if (cant && !isNaN(cant) && parseInt(cant) > 0) {
+            productos.push(header[c].trim() + ': ' + cant);
+          }
+        }
+      }
 
-      const v = parseInt(valor.replace(/[^0-9]/g, '')) || 0;
-      pendientes.push({ factura, cliente, valor: v });
+      pendientes.push({
+        cliente: cliente,
+        productos: productos.length > 0 ? productos.join(', ') : 'Pendiente revisar',
+        fila: i + 1
+      });
     }
 
     if (pendientes.length === 0) {
-      box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> No hay facturas pendientes. Todo al día.</div>';
+      box.innerHTML = '<div style="padding:12px"><span class="ok">✅</span> No hay remisiones pendientes. Todo al día.</div>';
       btn.disabled = false;
       btn.innerHTML = '⚡ Emitir';
       setTimeout(() => { box.className = 'status-box'; }, 3000);
       return;
     }
 
-    // 2. Mostrar resumen
-    let html = '<div style="padding:12px"><p style="color:#f0c040;margin-bottom:8px">📋 <strong>' + pendientes.length + '</strong> facturas pendientes:</p>';
-    html += '<div style="max-height:180px;overflow:auto;text-align:left;font-size:.82em;background:rgba(0,0,0,.2);border-radius:8px;padding:8px">';
+    // Mostrar resumen
+    let html = '<div style="padding:12px"><p style="color:#f0c040;margin-bottom:8px">📋 <strong>' + pendientes.length + '</strong> remisiones pendientes:</p>';
+    html += '<div style="max-height:200px;overflow:auto;text-align:left;font-size:.82em;background:rgba(0,0,0,.2);border-radius:8px;padding:8px">';
     pendientes.forEach(f => {
       html += '<div style="padding:4px 8px;border-bottom:1px solid rgba(255,255,255,.05)">' +
-        '<strong>' + f.factura + '</strong> — ' + f.cliente +
-        ' — $' + f.valor.toLocaleString('es-CO') + '</div>';
+        '<strong>Fila ' + f.fila + '</strong> — ' + f.cliente +
+        '<br><span style="color:#8b949e;font-size:.8em">' + f.productos + '</span></div>';
     });
     html += '</div>';
 
-    // 3. Disparar workflow directamente via API
-    html += '<p style="margin-top:14px;font-size:.9em">⚡ Emitir facturas automáticamente:</p>';
+    // Botón para disparar el workflow
+    html += '<p style="margin-top:14px;font-size:.9em">⚡ Emitir facturas en Alegra:</p>';
     html += '<button onclick="dispararWorkflow()" ' +
       'style="display:inline-block;margin-top:8px;padding:12px 28px;background:#3fb950;color:#fff;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer">' +
       '▶️ Emitir Ahora</button>';
@@ -194,7 +219,7 @@ async function dispararWorkflow() {
   statusEl.innerHTML = '<p style="color:#f0c040"><span class="spinner"></span> Enviando a Alegra...</p>';
 
   try {
-    const TOKEN = sessionStorage.getItem('gh_token');
+    const TOKEN = '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';
     const resp = await fetch(
       'https://api.github.com/repos/johnnyartesano26/crear-factura/actions/workflows/emitir.yml/dispatches',
       {
