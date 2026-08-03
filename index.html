@@ -89,6 +89,23 @@ h1{font-size:1.8em;color:#f0c040;margin-bottom:4px}
 <p>Revisa las facturas generadas directamente en tu cuenta de Alegra. Accede con tus credenciales.</p>
 <a href="https://app.alegra.com/user/login/country/colombia" target="_blank" class="btn btn-dark">🔗 Abrir Alegra</a>
 </div>
+
+<!-- Paso 4: Nota Crédito -->
+<div class="step" style="border-color:rgba(240,120,100,.4)">
+<div class="step-num">4</div>
+<h3>Nota Crédito</h3>
+<p>Anula una factura, restaura inventario y guarda el soporte en Drive.</p>
+<div id="ncFields" style="display:flex;flex-direction:column;gap:8px;width:100%">
+<input type="text" id="ncFactura" placeholder="N° Factura (ej: FE-4112)" style="width:100%;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:.82em;font-family:inherit">
+<input type="text" id="ncNumero" placeholder="N° Crédito (ej: NC-001)" style="width:100%;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:.82em;font-family:inherit">
+<input type="text" id="ncResponsable" placeholder="Responsable" style="width:100%;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:.82em;font-family:inherit">
+<input type="text" id="ncCliente" placeholder="Nombre del cliente" style="width:100%;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:.82em;font-family:inherit">
+<input type="date" id="ncFecha" style="width:100%;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:.82em;font-family:inherit;color-scheme:dark">
+<input type="text" id="ncObs" placeholder="Observaciones (opcional)" style="width:100%;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:.82em;font-family:inherit">
+</div>
+<button class="btn btn-primary" onclick="procesarNC()" id="btnNC" style="margin-top:10px;width:100%">📝 Anular Factura</button>
+<div class="status-box" id="ncStatusBox"></div>
+</div>
 </div>
 
 <div class="footer">crear factura · Madre Monte · v2.0</div>
@@ -225,6 +242,67 @@ async function dispararWorkflow() {
   }
   document.getElementById('btnEmitir').disabled = false;
   document.getElementById('btnEmitir').innerHTML = '⚡ Emitir';
+}
+
+async function procesarNC() {
+  const btn = document.getElementById('btnNC');
+  const box = document.getElementById('ncStatusBox');
+  const factura = document.getElementById('ncFactura').value.trim();
+  const ncNumero = document.getElementById('ncNumero').value.trim();
+  const responsable = document.getElementById('ncResponsable').value.trim();
+  const cliente = document.getElementById('ncCliente').value.trim();
+  const fecha = document.getElementById('ncFecha').value;
+  const obs = document.getElementById('ncObs').value.trim();
+
+  if (!factura || !ncNumero || !cliente) {
+    box.className = 'status-box show';
+    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Completa: N° Factura, N° Crédito y Cliente</div>';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Procesando...';
+  box.className = 'status-box show';
+  box.innerHTML = '<div style="padding:12px"><span class="spinner"></span> Conectando al bridge (localhost:5000)...</div>';
+
+  try {
+    const formData = new FormData();
+    formData.append('factura', factura);
+    formData.append('nc_numero', ncNumero);
+    formData.append('responsable', responsable);
+    formData.append('cliente', cliente);
+    formData.append('fecha', fecha || new Date().toISOString().split('T')[0]);
+    formData.append('observaciones', obs);
+
+    const resp = await fetch('http://localhost:5000/nota-credito', {
+      method: 'POST',
+      body: formData,
+    });
+    const data = await resp.json();
+
+    if (data.ok) {
+      let html = '<div style="padding:12px"><span class="ok">✅</span> Nota Crédito procesada</div>';
+      html += '<div style="text-align:left;font-size:.82em;background:rgba(255,255,255,.08);border-radius:8px;padding:12px;margin-top:8px">';
+      html += '<div>📄 FE-'+data.factura+' → <strong>NC-'+data.nc+'</strong></div>';
+      html += '<div>👤 '+data.cliente+' | 📅 '+data.fecha+'</div>';
+      if (data.responsable) html += '<div>✍️ '+data.responsable+'</div>';
+      html += '<div>📦 Inv: '+JSON.stringify(data.inventario_restaurado||{})+'</div>';
+      html += '<div>🧾 Alegra: '+JSON.stringify(data.alegra_nc||{})+'</div>';
+      html += '</div>';
+      box.innerHTML = html;
+      document.getElementById('ncFactura').value = '';
+      document.getElementById('ncNumero').value = '';
+      document.getElementById('ncResponsable').value = '';
+      document.getElementById('ncCliente').value = '';
+      document.getElementById('ncObs').value = '';
+    } else {
+      box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> '+ (data.error || 'Error') +'</div>';
+    }
+  } catch(e) {
+    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error: bridge no disponible (localhost:5000). Ejecuta <code>python3 src/bridge.py</code></div>';
+  }
+  btn.disabled = false;
+  btn.innerHTML = '📝 Anular Factura';
 }
 </script>
 </body>
