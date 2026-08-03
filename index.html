@@ -94,7 +94,7 @@ h1{font-size:1.8em;color:#f0c040;margin-bottom:4px}
 <div class="step" style="border-color:rgba(240,120,100,.4)">
 <div class="step-num">4</div>
 <h3>Nota Crédito</h3>
-<p>Anula una factura, restaura inventario y guarda el soporte en Drive. <a href="https://drive.google.com/drive/u/0/folders/1Evf823VIPhcUGBv8sx-ZECb9jCBugirK" target="_blank" style="color:#f0c040;font-size:.85em">📁 Reportes</a></p>
+<p>Consulta la factura en Alegra y guarda el archivo en Drive. <a href="https://drive.google.com/drive/u/0/folders/1Evf823VIPhcUGBv8sx-ZECb9jCBugirK" target="_blank" style="color:#f0c040">📁 Drive</a></p>
 <div id="ncFields" style="display:flex;flex-direction:column;gap:8px;width:100%">
 <input type="text" id="ncFactura" placeholder="N° Factura (ej: FE-4112)" style="width:100%;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:.82em;font-family:inherit">
 <input type="text" id="ncNumero" placeholder="N° Crédito (ej: NC-001)" style="width:100%;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:.82em;font-family:inherit">
@@ -281,13 +281,16 @@ async function procesarNC() {
     const data = await resp.json();
 
     if (data.ok) {
-      let html = '<div style="padding:12px"><span class="ok">✅</span> Nota Crédito procesada</div>';
+      let html = '<div style="padding:12px"><span class="ok">✅</span> Nota Crédito registrada</div>';
       html += '<div style="text-align:left;font-size:.82em;background:rgba(255,255,255,.08);border-radius:8px;padding:12px;margin-top:8px">';
       html += '<div>📄 FE-'+data.factura+' → <strong>NC-'+data.nc+'</strong></div>';
       html += '<div>👤 '+data.cliente+' | 📅 '+data.fecha+'</div>';
       if (data.responsable) html += '<div>✍️ '+data.responsable+'</div>';
-      html += '<div>📦 Inv: '+JSON.stringify(data.inventario_restaurado||{})+'</div>';
-      html += '<div>🧾 Alegra: '+JSON.stringify(data.alegra_nc||{})+'</div>';
+      html += '<div style="color:#f0c040;margin-top:4px">💰 Total factura: $'+(data.factura_total||0).toLocaleString('es-CO')+'</div>';
+      if (data.items_factura && data.items_factura.length) {
+        html += '<div style="margin-top:4px">📦 Items: ' + data.items_factura.map(i=>i.nombre+' x'+i.cantidad).join(', ') + '</div>';
+      }
+      if (data.drive_link) html += '<div style="margin-top:4px">📁 <a href="'+data.drive_link+'" target="_blank" style="color:#58a6ff">Ver en Drive</a></div>';
       html += '</div>';
       box.innerHTML = html;
       document.getElementById('ncFactura').value = '';
