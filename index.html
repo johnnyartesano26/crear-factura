@@ -263,7 +263,7 @@ async function procesarNC() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Procesando...';
   box.className = 'status-box show';
-  box.innerHTML = '<div style="padding:12px"><span class="spinner"></span> Conectando al bridge (localhost:5000)...</div>';
+  box.innerHTML = '<div style="padding:12px"><span class="spinner"></span> Conectando al bridge (localhost:5001)...</div>';
 
   try {
     const formData = new FormData();
@@ -274,7 +274,7 @@ async function procesarNC() {
     formData.append('fecha', fecha || new Date().toISOString().split('T')[0]);
     formData.append('observaciones', obs);
 
-    const resp = await fetch('http://localhost:5000/nota-credito', {
+    const resp = await fetch('http://localhost:5001/nota-credito', {
       method: 'POST',
       body: formData,
     });
@@ -302,7 +302,7 @@ async function procesarNC() {
       box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> '+ (data.error || 'Error') +'</div>';
     }
   } catch(e) {
-    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error: bridge no disponible (localhost:5000). Ejecuta <code>python3 src/bridge.py</code></div>';
+    box.innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error: bridge no disponible (localhost:5001). Ejecuta <code>python3 src/bridge.py</code></div>';
   }
   btn.disabled = false;
   btn.innerHTML = '📝 Anular Factura';
