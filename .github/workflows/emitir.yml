@@ -2,6 +2,15 @@ name: Emitir Facturas
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Simular sin crear facturas ni escribir Sheets'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
   schedule:
     - cron: '0 16 * * *'  # 11 AM Colombia (UTC-5) todos los días
 
@@ -27,10 +36,10 @@ jobs:
           ALEGRA_EMAIL: ${{ secrets.ALEGRA_EMAIL }}
           ALEGRA_TOKEN: ${{ secrets.ALEGRA_TOKEN }}
           GOOGLE_CREDS_JSON: ${{ secrets.GOOGLE_CREDS_JSON }}
-        run: python facturacion_async.py
+        run: python facturacion_async.py ${{ github.event.inputs.dry_run == 'true' && '--dry-run' || '' }}
 
       - name: Publicar diagnóstico agregado al dashboard
-        if: always()
+        if: always() && github.event.inputs.dry_run != 'true'
         env:
           PAT: ${{ secrets.DASHBOARD_PAT }}
         run: |
