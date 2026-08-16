@@ -258,6 +258,29 @@ def aplicar_cascada_descuento(stock, total_necesario):
     return stock
 
 
+def desglose_cascada(inicial, final, total_necesario):
+    """REGLA_NEGOCIO_01: desglose del descuento por estilo (para auditoría consultable).
+
+    Devuelve, por estilo, cuántas botellas salieron del stock de botellas y cuántas
+    se cubrieron desde el fermentador, y cuántos litros se descontaron del fermentador.
+    """
+    desglose = {}
+    for est in ESTILOS:
+        bot_pedidas = total_necesario[est]["bot"]
+        litros_pedidos = total_necesario[est]["litros"]
+        bot_de_stock = min(bot_pedidas, inicial[est]["bot"])
+        bot_por_ferm = max(0.0, bot_pedidas - inicial[est]["bot"])
+        litros_ferm = round(litros_pedidos + bot_por_ferm * BOTELLA_L, 1)
+        desglose[est] = {
+            "bot_pedidas": int(round(bot_pedidas)),
+            "bot_descontadas_de_stock": int(round(bot_de_stock)),
+            "bot_cubiertas_por_fermentador": int(round(bot_por_ferm)),
+            "litros_pedidos": round(litros_pedidos, 1),
+            "litros_descontados_de_fermentador": litros_ferm,
+        }
+    return desglose
+
+
 @timeit
 async def buscar_clientes_paralelo(alegra, filas):
     clientes_unicos = list(set(f["cliente"] for f in filas))
@@ -390,6 +413,9 @@ def generar_resumen_json(diagnostico: dict):
         "sin_stock": len(diagnostico.get("sin_stock", [])),
         "sin_cliente": len(diagnostico.get("sin_cliente", [])),
         "errores": len(diagnostico.get("errores", [])),
+        "inventario_inicial": diagnostico.get("inventario_inicial", {}),
+        "inventario_final": diagnostico.get("inventario_final", {}),
+        "descuento_inventario": diagnostico.get("descuento_inventario", {}),
         "resumen": diagnostico.get("resumen", ""),
     }
     try:
@@ -519,7 +545,11 @@ async def main():
         ]
 
         # REGLA_NEGOCIO_01: aplicar cascada botella → fermentador
+        inventario_inicial = {e: {"bot": stock[e]["bot"], "litros": stock[e]["litros"]} for e in ESTILOS}
         aplicar_cascada_descuento(stock, total_descontado)
+        diagnostico["inventario_inicial"] = inventario_inicial
+        diagnostico["inventario_final"] = {e: {"bot": stock[e]["bot"], "litros": stock[e]["litros"]} for e in ESTILOS}
+        diagnostico["descuento_inventario"] = desglose_cascada(inventario_inicial, stock, total_descontado)
 
         if not DRY and creadas:
             logger.info("\n📝 Actualizando Google Sheets...")
