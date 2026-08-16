@@ -1,0 +1,57 @@
+name: Sync Inventario
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'  # respaldo cada hora (el onEdit del Sheet es el trigger principal)
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install google-auth google-api-python-client python-dotenv
+
+      - name: Clonar dashboard-maestro (historial + destino de publicación)
+        run: git clone --depth 1 "https://github.com/johnnyartesano26/dashboard-maestro.git" /tmp/dm
+
+      - name: Sincronizar inventario (leer Sheet + regenerar conciliado)
+        env:
+          GOOGLE_CREDS_JSON: ${{ secrets.GOOGLE_CREDS_JSON }}
+          HISTORIAL_PATH: /tmp/dm/data/historial_facturacion.json
+        run: python sync_inventario.py
+
+      - name: Publicar conciliado al dashboard
+        if: always()
+        env:
+          PAT: ${{ secrets.DASHBOARD_PAT }}
+        run: |
+          if [ ! -f inventario_conciliado.json ]; then
+            echo "Sin conciliado para publicar."
+            exit 0
+          fi
+          if [ -z "$PAT" ]; then
+            echo "Sin DASHBOARD_PAT configurado, se omite la publicación."
+            exit 0
+          fi
+          cp inventario_conciliado.json /tmp/dm/data/inventario_conciliado.json
+          cd /tmp/dm
+          git remote set-url origin "https://x-access-token:${PAT}@github.com/johnnyartesano26/dashboard-maestro.git"
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/inventario_conciliado.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios en el conciliado."
+          else
+            git commit -m "Sync inventario $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git push
+          fi
