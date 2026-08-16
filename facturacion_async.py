@@ -498,6 +498,12 @@ async def main():
         "resumen": "",
     }
 
+    # REGLA_NEGOCIO_05: capturar SIEMPRE la lectura en vivo del Sheet (físico)
+    # para la conciliación, incluso si no hay filas pendientes por facturar.
+    diagnostico["inventario_inicial"] = {e: {"bot": stock[e]["bot"], "barril": stock[e]["barril"], "litros": stock[e]["litros"]} for e in ESTILOS}
+    diagnostico["inventario_final"] = diagnostico["inventario_inicial"]
+    diagnostico["descuento_inventario"] = {e: {"bot_descontadas_de_stock": 0, "litros_descontados_de_barril": 0.0, "litros_descontados_de_fermentador": 0.0} for e in ESTILOS}
+
     filas = obtener_filas_procesables(data)
     diagnostico["pendientes_procesar"] = len(filas)
     if not filas:
