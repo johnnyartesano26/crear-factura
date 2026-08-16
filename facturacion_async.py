@@ -60,14 +60,14 @@ ESTILO_DE = {
     "PTL01": "GOLDEN ALE", "PTL02": "IRISH RED ALE", "PTL03": "APA", "PTL04": "IPA", "PTL05": "STOUT",
 }
 
-ESTILOS = ["GOLDEN ALE", "IRISH RED ALE", "APA", "IPA", "STOUT"]
+ESTILOS_BASE = ["GOLDEN ALE", "IRISH RED ALE", "APA", "IPA", "STOUT"]
+ESTILOS_TEMPORADA = ["GERMAN PILS", "HIDROMIEL", "RED IPA"]
+ESTILOS = ESTILOS_BASE + ESTILOS_TEMPORADA
 
-# ⚠️ REGLA_NEGOCIO_01 — CASCADA BOTELLA → FERMENTADOR
+# ⚠️ REGLA_NEGOCIO_01 — CASCADA BOTELLA → BARRIL → FERMENTADOR
 # 1 botella = 0.330 L (valor canónico del sistema, ver ledger_inventario.py).
-# Si no hay stock suficiente en botellas pero sí en litros de fermentador,
-# el faltante de botellas se deduce automáticamente de los litros de fermentador.
-# (La columna de botellas/barriles puede estar desactualizada; el fermentador es
-#  la fuente de verdad vigente. Ver README de unificación, sección Reglas de Negocio.)
+# Si no hay stock suficiente en botellas, el faltante se cubre desde barril y
+# luego desde el fermentador. Ver README de unificación, sección Reglas de Negocio.
 BOTELLA_L = 0.330
 
 C_CLIENTE, C_DOM, C_FACTURAR, C_VALOR_DOM, C_DOM_ALT, C_FACTURADO = 2, 19, 22, 24, 23, 26
@@ -77,6 +77,34 @@ PARES_PROD = [(5, 6), (8, 9), (11, 12), (14, 15), (17, 18)]
 PAGO_MAP = {"credito": "CREDIT", "contado": "CASH"}
 MEDIO_MAP = {"efectivo": "CASH", "tranferencia débito": "DEBIT_CARD",
              "transferencia débito": "DEBIT_CARD", "transferencia": "BANK_TRANSFER"}
+
+
+def _normalizar_estilo(raw):
+    """Mapea el nombre/código en bruto del Sheet al estilo canónico (8 estilos).
+
+    Los estilos de temporada (GERMAN PILS, HIDROMIEL, RED IPA) no tienen código de
+    producto Alegra, solo se leen para el inventario/conciliación.
+    """
+    if not raw:
+        return None
+    r = str(raw).strip().lower()
+    if any(x in r for x in ['american india pale ale', 'vagabundo', 'ptl04', 'ptb04']):
+        return 'IPA'
+    if any(x in r for x in ['american pale ale', 'cienfuegos', 'ptl03', 'ptb03']):
+        return 'APA'
+    if any(x in r for x in ['golden ale', 'siempre viva', 'ptl01', 'ptb01']):
+        return 'GOLDEN ALE'
+    if any(x in r for x in ['irish red ale', 'mística', 'mistica', 'ptl02', 'ptb02']):
+        return 'IRISH RED ALE'
+    if any(x in r for x in ['stout', 'sangre negra', 'ptl05', 'ptb05']):
+        return 'STOUT'
+    if any(x in r for x in ['hidromiel', 'hidro']):
+        return 'HIDROMIEL'
+    if any(x in r for x in ['german pils']):
+        return 'GERMAN PILS'
+    if any(x in r for x in ['red ipa', 'red indian pale ale']):
+        return 'RED IPA'
+    return None
 
 
 def _f(v, d=0):
@@ -99,49 +127,42 @@ async def leer_hojas(svc):
         rows = svc.spreadsheets().values().get(
             spreadsheetId=SHEET_INVENTARIO, range="A:ZZ").execute().get("values", [])
         stock = {e: {"bot": 0.0, "barril": 0.0, "litros": 0.0} for e in ESTILOS}
-        cols = {e: {"bot": None, "barril": None, "litros": None} for e in ESTILOS}
-        row_num = None
         last = None
         for i in range(len(rows) - 1, -1, -1):
             if any(c.strip() for c in rows[i]):
                 last = rows[i]
-                row_num = i + 1
                 break
-        # ⚠️ ADV_01 — TRES CAPAS DE INVENTARIO (cascada)
-        # botella  ← "BOTELLA"
-        # barril   ← "LITRO"  (etiquetas "… Litros en barril (PTLxx)")
-        # fermentador ← "PTL" sin "LITRO" (etiquetas "PTLxx = Estilo - …")
-        if last:
-            for j, cell in enumerate(last):
-                up = cell.strip().upper()
-                if not up or j == 0:
-                    continue
-                est = next((e for e in ESTILOS if e in up), None)
-                if not est:
-                    continue
-                vcol = j - 1
-                if "BOTELLA" in up:
-                    stock[est]["bot"] = _f(last[vcol]) if vcol < len(last) else 0
-                    cols[est]["bot"] = vcol
-                elif "LITRO" in up:
-                    stock[est]["barril"] = _f(last[vcol]) if vcol < len(last) else 0
-                    cols[est]["barril"] = vcol
-                elif "PTL" in up and "LITRO" not in up:
-                    stock[est]["litros"] = _f(last[vcol]) if vcol < len(last) else 0
-                    cols[est]["litros"] = vcol
+        if not last:
+            return stock
+        # ⚠️ ADV_01 — LECTURA POR COLUMNAS (igual que nucleo_de_inventario.py)
+        # Fermentadores: columnas 1..14 (pares [litros, estilo])
+        # Barriles:       columnas 15..28 (pares [cantidad, estilo])
+        # Botellas:       columnas 29..40 (pares [cantidad, estilo])
+        for i in range(1, 15, 2):
+            litros = _f(last[i]) if i < len(last) else 0.0
+            est = _normalizar_estilo(last[i + 1]) if i + 1 < len(last) else None
+            if est and est in stock:
+                stock[est]["litros"] += litros
 
-        def _tab_name():
-            m = svc.spreadsheets().get(
-                spreadsheetId=SHEET_INVENTARIO, fields="sheets.properties.title").execute()
-            return m["sheets"][0]["properties"]["title"]
+        for i in range(15, 29, 2):
+            cant = _f(last[i]) if i < len(last) else 0.0
+            est = _normalizar_estilo(last[i + 1]) if i + 1 < len(last) else None
+            if est and est in stock:
+                stock[est]["barril"] += cant
 
-        return stock, cols, row_num, _tab_name()
+        for i in range(29, 41, 2):
+            cant = _f(last[i]) if i < len(last) else 0.0
+            est = _normalizar_estilo(last[i + 1]) if i + 1 < len(last) else None
+            if est and est in stock:
+                stock[est]["bot"] += cant
+
+        return stock
 
     data, headers = await loop.run_in_executor(None, _leer_remisiones)
-    stock, inv_cols, inv_row, inv_tab = await loop.run_in_executor(None, _leer_inventario)
+    stock = await loop.run_in_executor(None, _leer_inventario)
 
     assert headers, "No se encontraron encabezados en la hoja de remisiones"
-    return data, headers, stock, inv_cols, inv_row, inv_tab
+    return data, headers, stock
 
 
 def extraer_items(row):
@@ -458,7 +479,7 @@ async def main():
     svc = googleapiclient.discovery.build("sheets", "v4", credentials=creds)
 
     logger.info("📡 Leyendo hojas de cálculo...")
-    data, headers, stock, inv_cols, inv_row, inv_tab = await leer_hojas(svc)
+    data, headers, stock = await leer_hojas(svc)
 
     logger.info("📦 Inventario actual:")
     for e in ESTILOS:

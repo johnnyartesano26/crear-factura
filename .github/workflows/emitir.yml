@@ -53,7 +53,7 @@ jobs:
           fi
           git clone --depth 1 "https://x-access-token:${PAT}@github.com/johnnyartesano26/dashboard-maestro.git" /tmp/dm
           cp resumen_facturacion.json /tmp/dm/data/resumen_facturacion.json
-          # Acumular el registro en el historial de inventario (intervenible)
+          # Acumular el registro en el historial + generar la conciliación físico vs facturado
           python3 - <<'PY'
           import json, os
           record = json.load(open('resumen_facturacion.json'))
@@ -68,12 +68,41 @@ jobs:
               hist = []
           hist.append(record)
           json.dump(hist, open(hist_path, 'w'), ensure_ascii=False, indent=2)
-          print(f"Historial de facturación: {len(hist)} registros")
+
+          # Conciliación: físico (último snapshot del Sheet) − deducciones acumuladas
+          fisico = record.get('inventario_inicial', {})
+          estilos = sorted(fisico.keys())
+          deducciones = {e: {'bot': 0.0, 'barril': 0.0, 'litros': 0.0} for e in estilos}
+          for r in hist:
+              d = r.get('descuento_inventario', {})
+              for e in estilos:
+                  de = d.get(e, {})
+                  deducciones[e]['bot'] += de.get('bot_descontadas_de_stock', 0)
+                  deducciones[e]['barril'] += de.get('litros_descontados_de_barril', 0)
+                  deducciones[e]['litros'] += de.get('litros_descontados_de_fermentador', 0)
+
+          neto = {}
+          for e in estilos:
+              f = fisico.get(e, {})
+              neto[e] = {
+                  'bot': round(f.get('bot', 0) - deducciones[e]['bot'], 1),
+                  'barril': round(f.get('barril', 0) - deducciones[e]['barril'], 1),
+                  'litros': round(f.get('litros', 0) - deducciones[e]['litros'], 1),
+              }
+
+          conciliado = {
+              'fecha': record.get('fecha'),
+              'fisico': fisico,
+              'deducciones': deducciones,
+              'neto': neto,
+          }
+          json.dump(conciliado, open('/tmp/dm/data/inventario_conciliado.json', 'w'), ensure_ascii=False, indent=2)
+          print(f"Historial: {len(hist)} registros | Conciliación: {len(estilos)} estilos")
           PY
           cd /tmp/dm
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/resumen_facturacion.json data/historial_facturacion.json
+          git add data/resumen_facturacion.json data/historial_facturacion.json data/inventario_conciliado.json
           if git diff --cached --quiet; then
             echo "Sin cambios en el diagnóstico."
           else
