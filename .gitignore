@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs generados por config.py
+logs/
+
+# Salidas locales del pipeline de facturación
+resumen_facturacion.json
+detalle_telegram.txt
+
+# Entorno / credenciales
+.env
+*.env
