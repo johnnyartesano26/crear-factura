@@ -261,6 +261,10 @@ async def crear_facturas_paralelo(alegra, filas, client_cache):
         cid = client_cache.get(fila["cliente"])
         if not cid:
             return fila["row_num"], None, "sin_cliente"
+        if DRY:
+            resumen = ", ".join(f"{it['ref']}x{int(it['quantity'])}" for it in fila["items"])
+            logger.info("   [DRY] Simularía factura para %s (%s)", fila["cliente"], resumen)
+            return fila["row_num"], {"id": "DRY", "dry_run": True}, None
         try:
             items_alegra = [
                 {"id": it["id"], "quantity": it["quantity"], "price": it["price"], "tax": it["tax"]}
