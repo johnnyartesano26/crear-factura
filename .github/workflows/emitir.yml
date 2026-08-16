@@ -53,12 +53,29 @@ jobs:
           fi
           git clone --depth 1 "https://x-access-token:${PAT}@github.com/johnnyartesano26/dashboard-maestro.git" /tmp/dm
           cp resumen_facturacion.json /tmp/dm/data/resumen_facturacion.json
+          # Acumular el registro en el historial de inventario (intervenible)
+          python3 - <<'PY'
+          import json, os
+          record = json.load(open('resumen_facturacion.json'))
+          hist_path = '/tmp/dm/data/historial_facturacion.json'
+          hist = []
+          if os.path.exists(hist_path):
+              try:
+                  hist = json.load(open(hist_path))
+              except Exception:
+                  hist = []
+          if not isinstance(hist, list):
+              hist = []
+          hist.append(record)
+          json.dump(hist, open(hist_path, 'w'), ensure_ascii=False, indent=2)
+          print(f"Historial de facturación: {len(hist)} registros")
+          PY
           cd /tmp/dm
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/resumen_facturacion.json
+          git add data/resumen_facturacion.json data/historial_facturacion.json
           if git diff --cached --quiet; then
-            echo "Sin cambios en resumen_facturacion.json."
+            echo "Sin cambios en el diagnóstico."
           else
             git commit -m "Diagnóstico facturación $(date -u +'%Y-%m-%d %H:%M') UTC"
             git push

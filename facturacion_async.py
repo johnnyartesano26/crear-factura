@@ -79,15 +79,6 @@ MEDIO_MAP = {"efectivo": "CASH", "tranferencia débito": "DEBIT_CARD",
              "transferencia débito": "DEBIT_CARD", "transferencia": "BANK_TRANSFER"}
 
 
-def col_letter(idx):
-    s = ""
-    idx += 1
-    while idx > 0:
-        idx, r = divmod(idx - 1, 26)
-        s = chr(65 + r) + s
-    return s
-
-
 def _f(v, d=0):
     try:
         return float(str(v).replace(",", "."))
@@ -107,8 +98,8 @@ async def leer_hojas(svc):
     def _leer_inventario():
         rows = svc.spreadsheets().values().get(
             spreadsheetId=SHEET_INVENTARIO, range="A:ZZ").execute().get("values", [])
-        stock = {e: {"bot": 0.0, "litros": 0.0} for e in ESTILOS}
-        cols = {e: {"bot": None, "litros": None} for e in ESTILOS}
+        stock = {e: {"bot": 0.0, "barril": 0.0, "litros": 0.0} for e in ESTILOS}
+        cols = {e: {"bot": None, "barril": None, "litros": None} for e in ESTILOS}
         row_num = None
         last = None
         for i in range(len(rows) - 1, -1, -1):
@@ -116,9 +107,10 @@ async def leer_hojas(svc):
                 last = rows[i]
                 row_num = i + 1
                 break
-        # ⚠️ ADV_01 — INVENTARIO DE LITROS DESDE FERMENTADORES
-        # El stock de litros se lee de las columnas de fermentadores (etiquetas con "PTL"
-        # sin "LITRO"), NO de "Litros en barril" que es otra métrica distinta.
+        # ⚠️ ADV_01 — TRES CAPAS DE INVENTARIO (cascada)
+        # botella  ← "BOTELLA"
+        # barril   ← "LITRO"  (etiquetas "… Litros en barril (PTLxx)")
+        # fermentador ← "PTL" sin "LITRO" (etiquetas "PTLxx = Estilo - …")
         if last:
             for j, cell in enumerate(last):
                 up = cell.strip().upper()
@@ -131,6 +123,9 @@ async def leer_hojas(svc):
                 if "BOTELLA" in up:
                     stock[est]["bot"] = _f(last[vcol]) if vcol < len(last) else 0
                     cols[est]["bot"] = vcol
+                elif "LITRO" in up:
+                    stock[est]["barril"] = _f(last[vcol]) if vcol < len(last) else 0
+                    cols[est]["barril"] = vcol
                 elif "PTL" in up and "LITRO" not in up:
                     stock[est]["litros"] = _f(last[vcol]) if vcol < len(last) else 0
                     cols[est]["litros"] = vcol
@@ -198,15 +193,27 @@ def obtener_filas_procesables(data):
     return filas
 
 
+def _faltante_estilo(stock_estilo, needed):
+    """REGLA_NEGOCIO_01: litros que faltan tras la cascada botella → barril → fermentador.
+
+    - Botellas: primero se cubren con stock de botella.
+    - El faltante de botellas se convierte a litros (× BOTELLA_L) y se suma a los litros pedidos.
+    - Los litros se cubren primero con barril y luego con fermentador.
+    Devuelve el faltante final en litros (0 = suficiente).
+    """
+    rem_bot = max(0.0, needed["bot"] - stock_estilo["bot"])
+    total_lit = needed["litros"] + rem_bot * BOTELLA_L
+    cubierto_barril = min(total_lit, stock_estilo["barril"])
+    rem_lit = total_lit - cubierto_barril
+    return max(0.0, rem_lit - stock_estilo["litros"])
+
+
 def verificar_stock_batch(filas, stock):
     assert isinstance(stock, dict), "stock debe ser un diccionario"
     total_necesario = {e: {"bot": 0.0, "litros": 0.0} for e in ESTILOS}
-    sin_stock = []
-    validas = []
 
+    # 1) Sumar la demanda total por estilo
     for f in filas:
-        needed = {e: {"bot": 0.0, "litros": 0.0} for e in ESTILOS}
-        ok = True
         for it in f["items"]:
             if it["ref"] == "DOM01":
                 continue
@@ -214,69 +221,66 @@ def verificar_stock_batch(filas, stock):
             if not est:
                 continue
             tipo = "bot" if it["ref"].startswith("PTB") else "litros"
-            needed[est][tipo] += it["quantity"]
+            total_necesario[est][tipo] += it["quantity"]
 
-        for est in ESTILOS:
-            new_bot = total_necesario[est]["bot"] + needed[est]["bot"]
-            new_lit = total_necesario[est]["litros"] + needed[est]["litros"]
-            # REGLA_NEGOCIO_01: el faltante de botellas se cubre desde el fermentador (0.330L c/u).
-            faltante_bot = max(0.0, new_bot - stock[est]["bot"])
-            litros_requeridos = new_lit + faltante_bot * BOTELLA_L
-            if litros_requeridos > stock[est]["litros"]:
-                disp_bot = max(0, stock[est]["bot"] - total_necesario[est]["bot"])
-                disp_lit = max(0, stock[est]["litros"] - total_necesario[est]["litros"])
-                logger.warning("   ⛔ Fila %s %s: %s necesita %sbot/%sL, disponible %sbot/%sL",
-                               f["row_num"], f["cliente"], est,
-                               int(needed[est]["bot"]), needed[est]["litros"],
-                               int(disp_bot), disp_lit)
-                ok = False
+    # 2) Determinar qué estilos no alcanzan con la cascada de 3 capas
+    sin_stock_estilos = {est for est in ESTILOS if _faltante_estilo(stock[est], total_necesario[est]) > 0}
 
-        if ok:
-            validas.append(f)
-            for est in ESTILOS:
-                for tipo in ("bot", "litros"):
-                    total_necesario[est][tipo] += needed[est][tipo]
-        else:
+    # 3) Separar filas válidas vs sin stock (una fila es "sin stock" si usa un estilo inviable)
+    validas = []
+    sin_stock = []
+    for f in filas:
+        estilos_fila = {ESTILO_DE[it["ref"]] for it in f["items"]
+                        if it["ref"] != "DOM01" and ESTILO_DE.get(it["ref"])}
+        if estilos_fila & sin_stock_estilos:
+            logger.warning("   ⛔ Fila %s %s: sin stock en %s",
+                           f["row_num"], f["cliente"], ", ".join(sorted(estilos_fila & sin_stock_estilos)))
             sin_stock.append(f)
+        else:
+            validas.append(f)
 
     return validas, sin_stock, total_necesario
 
 
 def aplicar_cascada_descuento(stock, total_necesario):
-    """REGLA_NEGOCIO_01: aplica el descuento de inventario respetando la cascada.
+    """REGLA_NEGOCIO_01: aplica el descuento respetando la cascada botella → barril → fermentador.
 
-    - Botellas: se descuentan de la capa de botellas (hasta agotarla).
-    - El faltante de botellas se convierte a litros (× 0.330) y se descuenta del
-      fermentador, junto con los litros pedidos directamente (PTL).
+    Solo modifica el inventario EN MEMORIA (para auditoría/historial); no escribe el Sheet.
     """
     for est in ESTILOS:
-        tb = total_necesario[est]["bot"]
-        tl = total_necesario[est]["litros"]
-        faltante_bot = max(0.0, tb - stock[est]["bot"])
-        stock[est]["bot"] = max(0.0, round(stock[est]["bot"] - tb, 1))
-        stock[est]["litros"] = round(stock[est]["litros"] - tl - faltante_bot * BOTELLA_L, 1)
+        bot = total_necesario[est]["bot"]
+        lit = total_necesario[est]["litros"]
+        # 1) botellas desde stock de botella
+        rem_bot = max(0.0, bot - stock[est]["bot"])
+        stock[est]["bot"] = round(max(0.0, stock[est]["bot"] - bot), 1)
+        # 2) litros (pedidos + faltante de botellas) desde barril
+        total_lit = lit + rem_bot * BOTELLA_L
+        barril_antes = stock[est]["barril"]
+        stock[est]["barril"] = round(max(0.0, barril_antes - total_lit), 1)
+        rem_lit = max(0.0, total_lit - barril_antes)
+        # 3) resto desde fermentador
+        stock[est]["litros"] = round(max(0.0, stock[est]["litros"] - rem_lit), 1)
     return stock
 
 
 def desglose_cascada(inicial, final, total_necesario):
-    """REGLA_NEGOCIO_01: desglose del descuento por estilo (para auditoría consultable).
-
-    Devuelve, por estilo, cuántas botellas salieron del stock de botellas y cuántas
-    se cubrieron desde el fermentador, y cuántos litros se descontaron del fermentador.
-    """
+    """REGLA_NEGOCIO_01: desglose del descuento por estilo (para el historial consultable)."""
     desglose = {}
     for est in ESTILOS:
         bot_pedidas = total_necesario[est]["bot"]
-        litros_pedidos = total_necesario[est]["litros"]
+        lit_pedidos = total_necesario[est]["litros"]
         bot_de_stock = min(bot_pedidas, inicial[est]["bot"])
-        bot_por_ferm = max(0.0, bot_pedidas - inicial[est]["bot"])
-        litros_ferm = round(litros_pedidos + bot_por_ferm * BOTELLA_L, 1)
+        bot_cubiertas_litros = max(0.0, bot_pedidas - inicial[est]["bot"])
+        total_lit = lit_pedidos + bot_cubiertas_litros * BOTELLA_L
+        lit_de_barril = min(total_lit, inicial[est]["barril"])
+        lit_de_ferm = round(max(0.0, total_lit - inicial[est]["barril"]), 1)
         desglose[est] = {
             "bot_pedidas": int(round(bot_pedidas)),
             "bot_descontadas_de_stock": int(round(bot_de_stock)),
-            "bot_cubiertas_por_fermentador": int(round(bot_por_ferm)),
-            "litros_pedidos": round(litros_pedidos, 1),
-            "litros_descontados_de_fermentador": litros_ferm,
+            "bot_cubiertas_por_litros": int(round(bot_cubiertas_litros)),
+            "litros_pedidos": round(lit_pedidos, 1),
+            "litros_descontados_de_barril": round(lit_de_barril, 1),
+            "litros_descontados_de_fermentador": lit_de_ferm,
         }
     return desglose
 
@@ -354,53 +358,35 @@ async def crear_facturas_paralelo(alegra, filas, client_cache):
     return creadas, sin_cliente, errores
 
 
-async def actualizar_sheets(svc, creadas, total_descontado, stock, inv_cols, inv_row, inv_tab):
+async def actualizar_sheets(svc, creadas):
+    """Marca "Facturado {id}" en Remisiones (columna AA). NO toca el inventario.
+
+    La deducción de inventario se registra en el historial (historial_facturacion.json),
+    no en el Sheet, que es la fuente de verdad gestionada por nucleo_de_inventario.
+    """
     loop = asyncio.get_running_loop()
-    updates = []
-
-    for c in creadas:
-        updates.append({
-            "range": f"AA{c['row_num']}",
-            "values": [[f"Facturado {c['factura']['id']}"]],
-        })
-
-    for est in ESTILOS:
-        # REGLA_NEGOCIO_01: escribir ambas capas si el estilo tuvo demanda
-        # (el faltante de botellas se descuenta del fermentador).
-        if total_descontado[est]["bot"] or total_descontado[est]["litros"]:
-            for tipo in ("bot", "litros"):
-                if inv_cols[est][tipo] is not None:
-                    rng = f"'{inv_tab}'!{col_letter(inv_cols[est][tipo])}{inv_row}"
-                    updates.append({"range": rng, "values": [[stock[est][tipo]]]})
+    updates = [
+        {"range": f"AA{c['row_num']}", "values": [[f"Facturado {c['factura']['id']}"]]}
+        for c in creadas
+    ]
 
     if not updates:
         return
 
     if DRY:
-        logger.info("\n📉 [DRY] Actualizaciones que se aplicarían:")
+        logger.info("\n📝 [DRY] Se marcarían como Facturado:")
         for u in updates:
             logger.info("   %s → %s", u["range"], u["values"])
         return
 
     def _batch_remisiones():
-        rem_updates = [u for u in updates if "AA" in u["range"]]
-        if rem_updates:
-            svc.spreadsheets().values().batchUpdate(
-                spreadsheetId=SHEET_REMISIONES,
-                body={"valueInputOption": "USER_ENTERED", "data": rem_updates},
-            ).execute()
-
-    def _batch_inventario():
-        inv_updates = [u for u in updates if "AA" not in u["range"]]
-        if inv_updates:
-            svc.spreadsheets().values().batchUpdate(
-                spreadsheetId=SHEET_INVENTARIO,
-                body={"valueInputOption": "USER_ENTERED", "data": inv_updates},
-            ).execute()
+        svc.spreadsheets().values().batchUpdate(
+            spreadsheetId=SHEET_REMISIONES,
+            body={"valueInputOption": "USER_ENTERED", "data": updates},
+        ).execute()
 
     await loop.run_in_executor(None, _batch_remisiones)
-    await loop.run_in_executor(None, _batch_inventario)
-    logger.info("\n📉 Inventario actualizado en el Sheet.")
+    logger.info("\n📝 Remisiones marcadas como Facturado (el inventario NO se modifica).")
 
 
 def generar_resumen_json(diagnostico: dict):
@@ -476,7 +462,8 @@ async def main():
 
     logger.info("📦 Inventario actual:")
     for e in ESTILOS:
-        logger.info("   %s: %s bot, %sL", e, int(stock[e]["bot"]), stock[e]["litros"])
+        logger.info("   %s: %s bot | %sL barril | %sL fermentador",
+                    e, int(stock[e]["bot"]), stock[e]["barril"], stock[e]["litros"])
 
     diagnostico = {
         "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -544,16 +531,16 @@ async def main():
             for c in creadas
         ]
 
-        # REGLA_NEGOCIO_01: aplicar cascada botella → fermentador
-        inventario_inicial = {e: {"bot": stock[e]["bot"], "litros": stock[e]["litros"]} for e in ESTILOS}
+        # REGLA_NEGOCIO_01: cascada botella → barril → fermentador (solo en memoria)
+        inventario_inicial = {e: {"bot": stock[e]["bot"], "barril": stock[e]["barril"], "litros": stock[e]["litros"]} for e in ESTILOS}
         aplicar_cascada_descuento(stock, total_descontado)
         diagnostico["inventario_inicial"] = inventario_inicial
-        diagnostico["inventario_final"] = {e: {"bot": stock[e]["bot"], "litros": stock[e]["litros"]} for e in ESTILOS}
+        diagnostico["inventario_final"] = {e: {"bot": stock[e]["bot"], "barril": stock[e]["barril"], "litros": stock[e]["litros"]} for e in ESTILOS}
         diagnostico["descuento_inventario"] = desglose_cascada(inventario_inicial, stock, total_descontado)
 
         if not DRY and creadas:
-            logger.info("\n📝 Actualizando Google Sheets...")
-            await actualizar_sheets(svc, creadas, total_descontado, stock, inv_cols, inv_row, inv_tab)
+            logger.info("\n📝 Marcando facturas como Facturado en Remisiones...")
+            await actualizar_sheets(svc, creadas)
 
     finally:
         await alegra.close()
