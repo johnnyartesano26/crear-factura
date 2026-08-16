@@ -62,6 +62,14 @@ ESTILO_DE = {
 
 ESTILOS = ["GOLDEN ALE", "IRISH RED ALE", "APA", "IPA", "STOUT"]
 
+# ⚠️ REGLA_NEGOCIO_01 — CASCADA BOTELLA → FERMENTADOR
+# 1 botella = 0.330 L (valor canónico del sistema, ver ledger_inventario.py).
+# Si no hay stock suficiente en botellas pero sí en litros de fermentador,
+# el faltante de botellas se deduce automáticamente de los litros de fermentador.
+# (La columna de botellas/barriles puede estar desactualizada; el fermentador es
+#  la fuente de verdad vigente. Ver README de unificación, sección Reglas de Negocio.)
+BOTELLA_L = 0.330
+
 C_CLIENTE, C_DOM, C_FACTURAR, C_VALOR_DOM, C_DOM_ALT, C_FACTURADO = 2, 19, 22, 24, 23, 26
 C_PAGO, C_MEDIO = 3, 4
 PARES_PROD = [(5, 6), (8, 9), (11, 12), (14, 15), (17, 18)]
@@ -211,7 +219,10 @@ def verificar_stock_batch(filas, stock):
         for est in ESTILOS:
             new_bot = total_necesario[est]["bot"] + needed[est]["bot"]
             new_lit = total_necesario[est]["litros"] + needed[est]["litros"]
-            if new_bot > stock[est]["bot"] or new_lit > stock[est]["litros"]:
+            # REGLA_NEGOCIO_01: el faltante de botellas se cubre desde el fermentador (0.330L c/u).
+            faltante_bot = max(0.0, new_bot - stock[est]["bot"])
+            litros_requeridos = new_lit + faltante_bot * BOTELLA_L
+            if litros_requeridos > stock[est]["litros"]:
                 disp_bot = max(0, stock[est]["bot"] - total_necesario[est]["bot"])
                 disp_lit = max(0, stock[est]["litros"] - total_necesario[est]["litros"])
                 logger.warning("   ⛔ Fila %s %s: %s necesita %sbot/%sL, disponible %sbot/%sL",
@@ -229,6 +240,22 @@ def verificar_stock_batch(filas, stock):
             sin_stock.append(f)
 
     return validas, sin_stock, total_necesario
+
+
+def aplicar_cascada_descuento(stock, total_necesario):
+    """REGLA_NEGOCIO_01: aplica el descuento de inventario respetando la cascada.
+
+    - Botellas: se descuentan de la capa de botellas (hasta agotarla).
+    - El faltante de botellas se convierte a litros (× 0.330) y se descuenta del
+      fermentador, junto con los litros pedidos directamente (PTL).
+    """
+    for est in ESTILOS:
+        tb = total_necesario[est]["bot"]
+        tl = total_necesario[est]["litros"]
+        faltante_bot = max(0.0, tb - stock[est]["bot"])
+        stock[est]["bot"] = max(0.0, round(stock[est]["bot"] - tb, 1))
+        stock[est]["litros"] = round(stock[est]["litros"] - tl - faltante_bot * BOTELLA_L, 1)
+    return stock
 
 
 @timeit
@@ -315,11 +342,13 @@ async def actualizar_sheets(svc, creadas, total_descontado, stock, inv_cols, inv
         })
 
     for est in ESTILOS:
-        for tipo in ("bot", "litros"):
-            d = total_descontado[est][tipo]
-            if d and inv_cols[est][tipo] is not None:
-                rng = f"'{inv_tab}'!{col_letter(inv_cols[est][tipo])}{inv_row}"
-                updates.append({"range": rng, "values": [[stock[est][tipo]]]})
+        # REGLA_NEGOCIO_01: escribir ambas capas si el estilo tuvo demanda
+        # (el faltante de botellas se descuenta del fermentador).
+        if total_descontado[est]["bot"] or total_descontado[est]["litros"]:
+            for tipo in ("bot", "litros"):
+                if inv_cols[est][tipo] is not None:
+                    rng = f"'{inv_tab}'!{col_letter(inv_cols[est][tipo])}{inv_row}"
+                    updates.append({"range": rng, "values": [[stock[est][tipo]]]})
 
     if not updates:
         return
@@ -489,9 +518,8 @@ async def main():
             for c in creadas
         ]
 
-        for est in ESTILOS:
-            for tipo in ("bot", "litros"):
-                stock[est][tipo] -= total_descontado[est][tipo]
+        # REGLA_NEGOCIO_01: aplicar cascada botella → fermentador
+        aplicar_cascada_descuento(stock, total_descontado)
 
         if not DRY and creadas:
             logger.info("\n📝 Actualizando Google Sheets...")
