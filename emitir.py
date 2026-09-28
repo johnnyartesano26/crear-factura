@@ -228,7 +228,7 @@ def main():
     for i, row in enumerate(data, start=2):
         if C_FACTURAR >= len(row) or row[C_FACTURAR].strip().lower() not in ("si", "sí", "true", "1"):
             continue
-        if C_FACTURADO < len(row) and row[C_FACTURADO].strip():
+        if C_FACTURADO < len(row) and row[C_FACTURADO].strip().startswith("Facturado"):
             ya += 1; continue
         cliente = row[C_CLIENTE].strip() if C_CLIENTE < len(row) else ""
         if not cliente:
