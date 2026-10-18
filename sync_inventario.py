@@ -247,13 +247,18 @@ def main():
             deducciones[e]["barril"] += de.get("litros_descontados_de_barril", 0)
             deducciones[e]["litros"] += de.get("litros_descontados_de_fermentador", 0)
 
+    # ⚠️ MODELO A: el Sheet físico ya refleja las ventas (el operario anota el stock
+    # actual). Por lo tanto "neto" (stock disponible) == "físico". Las "deducciones"
+    # de facturación se conservan como dato de AUDITORÍA (para comparar físico vs
+    # facturado), NO se restan del físico (restarlas duplicaba las ventas y producía
+    # stock negativo).
     neto = {}
     for e in ESTILOS:
         f = stock[e]
         neto[e] = {
-            "bot": round(f["bot"] - deducciones[e]["bot"], 1),
-            "barril": round(f["barril"] - deducciones[e]["barril"], 1),
-            "litros": round(f["litros"] - deducciones[e]["litros"], 1),
+            "bot": round(f["bot"], 1),
+            "barril": round(f["barril"], 1),
+            "litros": round(f["litros"], 1),
         }
 
     conciliado = {

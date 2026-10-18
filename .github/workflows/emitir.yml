@@ -69,7 +69,7 @@ jobs:
           hist.append(record)
           json.dump(hist, open(hist_path, 'w'), ensure_ascii=False, indent=2)
 
-          # Conciliación: físico (último snapshot del Sheet) − deducciones acumuladas
+          # Conciliación: físico (último snapshot del Sheet) + deducciones acumuladas (auditoría)
           fisico = record.get('inventario_inicial', {})
           estilos = sorted(fisico.keys())
           deducciones = {e: {'bot': 0.0, 'barril': 0.0, 'litros': 0.0} for e in estilos}
@@ -81,13 +81,15 @@ jobs:
                   deducciones[e]['barril'] += de.get('litros_descontados_de_barril', 0)
                   deducciones[e]['litros'] += de.get('litros_descontados_de_fermentador', 0)
 
+          # ⚠️ MODELO A: el Sheet físico ya refleja las ventas. "neto" (disponible) == físico.
+          # Las "deducciones" se conservan para auditoría (físico vs facturado), NO se restan.
           neto = {}
           for e in estilos:
               f = fisico.get(e, {})
               neto[e] = {
-                  'bot': round(f.get('bot', 0) - deducciones[e]['bot'], 1),
-                  'barril': round(f.get('barril', 0) - deducciones[e]['barril'], 1),
-                  'litros': round(f.get('litros', 0) - deducciones[e]['litros'], 1),
+                  'bot': round(f.get('bot', 0), 1),
+                  'barril': round(f.get('barril', 0), 1),
+                  'litros': round(f.get('litros', 0), 1),
               }
 
           conciliado = {
