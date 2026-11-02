@@ -114,6 +114,12 @@ h1{font-size:1.8em;color:#f0c040;margin-bottom:4px}
 <script>
 const CLAVE = 'MadreMonte2026';
 
+// ── Backend (Google Apps Script) — ver backend_apps_script.gs ───────────────
+// 1. Despliega el script como Web App y copia aquí la URL "/exec".
+// 2. CLAVE_EMITIR debe coincidir con la Propiedad CLAVE_EMITIR del Script.
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycby2ndJFzBWj7mBYxihCHQnQvCvkbAHnq1CRb6gZHSrLx5VeQs0H6Je4aluT38MKwuDNBg/exec';
+const CLAVE_EMITIR = 'MadreMonte-Emitir-2026';
+
 function validarClave() {
   const input = document.getElementById('claveInput').value;
   if (input === CLAVE) {
@@ -216,26 +222,18 @@ async function emitirFactura() {
 }
 
 async function dispararWorkflow() {
-    const T = ['gh','p_','tx','fd','l2','Zp','JH','Ie','rA','zN','fN','9i','ho','O1','KJ','sQ','ya','1Q','mo','zT'];
-    const TOKEN = T.join('');
   try {
-    const resp = await fetch(
-      'https://api.github.com/repos/johnnyartesano26/crear-factura/actions/workflows/emitir.yml/dispatches',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + TOKEN,
-          'Accept': 'application/vnd.github+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ref: 'main' })
-      }
-    );
-    if (resp.ok || resp.status === 204) {
+    const resp = await fetch(BACKEND_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clave: CLAVE_EMITIR })
+    });
+    let data = {};
+    try { data = await resp.json(); } catch (_) {}
+    if (data.ok) {
       document.getElementById('statusBox').innerHTML = '<div style="padding:12px"><span class="ok">✅</span> Factura enviada a Alegra. Revisa Telegram.</div>';
     } else {
-      const err = await resp.text();
-      document.getElementById('statusBox').innerHTML = '<div style="padding:12px"><span class="err">❌</span> Error HTTP ' + resp.status + '</div>';
+      document.getElementById('statusBox').innerHTML = '<div style="padding:12px"><span class="err">❌</span> ' + (data.error || ('Error HTTP ' + resp.status)) + '</div>';
     }
   } catch(e) {
     document.getElementById('statusBox').innerHTML = '<div style="padding:12px"><span class="err">❌</span> ' + e.message + '</div>';

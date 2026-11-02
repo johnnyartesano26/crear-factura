@@ -20,6 +20,45 @@
  * ──────────────────────────────────────────────────────────────────────────
  */
 
+/**
+ * ── BITÁCORA / NOTA DE MANTENIMIENTO (2026-11-01) ────────────────────────
+ * Incidente:
+ *   El botón "⚡ Emitir" de index.html mostraba "❌ Error HTTP 401".
+ *
+ * Diagnóstico:
+ *   El 401 NO provenía de Alegra. El botón dispara el workflow emitir.yml
+ *   a través de la API de GitHub, y el Personal Access Token (PAT) que estaba
+ *   embebido en index.html se encontraba inválido / revocado (GitHub respondía
+ *   "Bad credentials"). Se confirmó que las credenciales de Alegra sí son
+ *   válidas (la API responde HTTP 200).
+ *
+ * Medidas aplicadas:
+ *   1. Se generó un PAT nuevo de GitHub con los scopes `repo` y `workflow`
+ *      (los necesarios para disparar workflow_dispatch).
+ *   2. Se actualizó el array ofuscado `T` dentro de dispararWorkflow() en
+ *      index.html con el nuevo token.
+ *   (El valor del token NO se registra aquí por seguridad.)
+ *
+ * Recomendación (APLICADA el 2026-11-01):
+ *   index.html ya fue migrado a ESTE backend: se eliminó el fetch directo a
+ *   GitHub (que llevaba el PAT embebido en el HTML) y ahora el botón llama a
+ *   esta Web App vía BACKEND_URL, enviando solo la CLAVE_EMITIR. El GH_TOKEN
+ *   vive únicamente en las Propiedades del Script y nunca se expone en el
+ *   navegador del usuario final.
+ *
+ *   Pasos manuales restantes (quien configure esto):
+ *   1. Crear/desplegar este script como Web App y copiar la URL /exec.
+ *   2. En "Propiedades del Script":
+ *        GH_TOKEN     = <PAT nuevo con scopes repo + workflow>
+ *        CLAVE_EMITIR = <misma clave que en index.html>
+ *        REPO         = johnnyartesano26/crear-factura
+ *        WORKFLOW     = emitir.yml
+ *   3. Pegar la URL /exec en index.html (const BACKEND_URL).
+ *   4. Hacer commit + push para publicar el cambio en GitHub Pages.
+ *   5. Rotar el PAT periódicamente.
+ * ──────────────────────────────────────────────────────────────────────────
+ */
+
 function doPost(e) {
   var out = ContentService.createTextOutput().setMimeType(ContentService.MimeType.JSON);
   try {
